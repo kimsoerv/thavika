@@ -1,0 +1,800 @@
+{
+  "@@locale": "en",
+  "appName": "Thavika",
+  "tabHome": "Home",
+  "tabTransactions": "Transactions",
+  "tabPlan": "Plan",
+  "balanceThisMonth": "Balance this month",
+  "income": "Income",
+  "expense": "Expense",
+  "spent": "Spent",
+  "recent": "Recent",
+  "spendingByCategory": "Spending by category",
+  "noEntriesTitle": "Start your first entry",
+  "noEntriesBody": "Tap + to note an expense or income.",
+  "addTitle": "Add",
+  "editTitle": "Edit entry",
+  "noteHint": "Add a note (optional)",
+  "save": "Save",
+  "amountRequired": "Enter an amount first",
+  "categoryRequired": "Pick a category",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "addCategory": "Add category",
+  "categoryName": "Category name",
+  "categoryNameRequired": "Enter a name",
+  "more": "More",
+  "add": "Add",
+  "cancel": "Cancel",
+  "search": "Search",
+  "all": "All",
+  "entrySaved": "Entry saved",
+  "entryDeleted": "Entry deleted",
+  "undo": "Undo",
+  "swipeHint": "Swipe left to delete, tap to edit.",
+  "noMatches": "No entries match.",
+  "previousMonth": "Previous month",
+  "nextMonth": "Next month",
+  "uncategorized": "Uncategorized",
+  "otherSlice": "Other",
+  "catHousing": "Housing",
+  "catFood": "Food",
+  "catTransport": "Transport",
+  "catBills": "Bills",
+  "catHealth": "Health",
+  "catFamily": "Family",
+  "catShopping": "Shopping",
+  "catFun": "Fun",
+  "catPersonal": "Personal",
+  "catOther": "Other",
+  "catSalary": "Salary",
+  "catBonus": "Bonus",
+  "catOtherIncome": "Other income",
+  "groupNeeds": "Needs",
+  "groupWants": "Wants",
+  "groupSavings": "Savings",
+  "groupGiving": "Giving and debt",
+  "groupSpending": "Spending",
+  "itemEmergencyFund": "Emergency fund",
+  "itemGoals": "Goals",
+  "itemGiving": "Giving",
+  "itemDebtPayment": "Debt payment",
+  "tplBalanced": "50 / 30 / 20",
+  "tplBalancedHint": "Best known",
+  "tplSeventy": "70 / 20 / 10",
+  "tplSeventyHint": "Adds giving or debt",
+  "tplEighty": "80 / 20",
+  "tplEightyHint": "Save first, simple",
+  "tplCustom": "Custom",
+  "tplCustomHint": "Start from zero",
+  "planSetupTitle": "Choose your plan",
+  "planEditTitle": "Edit your plan",
+  "planIncomeLabel": "Monthly income after tax",
+  "planIncomeRequired": "Enter your monthly income first",
+  "planIncomeHint": "Enter your income to see the amounts.",
+  "planGuidance": "These are common starting points, not advice. Change them to fit your life.",
+  "planEdit": "Edit",
+  "planDone": "Done",
+  "planReset": "Reset",
+  "planUse": "Use this plan",
+  "planYourCategories": "Your categories",
+  "planLeftToAssign": "Left to assign: {amount}",
+  "@planLeftToAssign": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planOverIncome": "Over your income by {amount}",
+  "@planOverIncome": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planEveryDollar": "Every dollar has a job",
+  "planYouWillSave": "You will save",
+  "planPerMonth": "{amount} per month",
+  "@planPerMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planIn12Months": "{amount} in 12 months",
+  "@planIn12Months": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planAddTo": "Add to {group}",
+  "@planAddTo": {
+    "placeholders": {
+      "group": {
+        "type": "String"
+      }
+    }
+  },
+  "planItemName": "Name",
+  "planItemNameRequired": "Enter a name or pick a category",
+  "planLinkCategory": "Check spending against a category",
+  "planNoTracking": "Not tracked",
+  "planFixed": "Fixed",
+  "planEmptyTitle": "Make a plan",
+  "planEmptyBody": "Pick a plan and Thavika will tell you if your spending is on track.",
+  "planChoose": "Choose a plan",
+  "planChange": "Edit plan",
+  "checkTitle": "Plan check",
+  "checkDaysLeft": "{days, plural, =0{Last day of the month} =1{1 day left} other{{days} days left}}",
+  "@checkDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "checkOnTrack": "On track",
+  "checkSlightlyAhead": "Slightly ahead",
+  "checkOffTrack": "Off track",
+  "checkOver": "Over budget",
+  "checkSummaryOn": "On track",
+  "checkSummaryMostly": "Mostly on track",
+  "checkSummaryOff": "{count, plural, =1{Off track in 1 category} other{Off track in {count} categories}}",
+  "@checkSummaryOff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checkSavingEstimate": "At this pace you would save {amount} instead of {planned}.",
+  "@checkSavingEstimate": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "planned": {
+        "type": "String"
+      }
+    }
+  },
+  "checkSavingOnPlan": "You are on pace to save {planned} this month.",
+  "@checkSavingOnPlan": {
+    "placeholders": {
+      "planned": {
+        "type": "String"
+      }
+    }
+  },
+  "checkSafeToSpend": "Safe to spend today",
+  "checkPaceLine": "Black line = where you should be today",
+  "checkPlannedSaving": "Planned saving",
+  "remindersTitle": "Reminders",
+  "remindersDaily": "Daily reminder",
+  "remindersTime": "Reminder time",
+  "remindersDenied": "Notifications are off for Thavika. Turn them on in your phone settings to get reminders.",
+  "notifDailyBody": "Did you record today's spending?",
+  "notifPaceBody": "{category}: {spent} of {budget} used. {left} left, about {perDay} per day.",
+  "@notifPaceBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "perDay": {
+        "type": "String"
+      }
+    }
+  },
+  "notifNearLimitBody": "{category} is at 80% of its budget.",
+  "@notifNearLimitBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "notifOverBody": "{category} is over budget by {amount}.",
+  "@notifOverBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "tabReports": "Reports",
+  "delete": "Delete",
+  "edit": "Edit",
+  "settingsTitle": "Settings",
+  "goalsTitle": "Savings goals",
+  "goalsEmpty": "Set a goal like a new phone or an emergency fund.",
+  "goalNew": "New goal",
+  "goalEdit": "Edit goal",
+  "goalName": "Goal name",
+  "goalNameHint": "New phone",
+  "goalNameRequired": "Enter a name for the goal",
+  "goalTarget": "Target amount",
+  "goalTargetRequired": "Enter a target amount",
+  "goalTargetDate": "Target date (optional)",
+  "goalNoDate": "No date",
+  "goalSavedOf": "{saved} of {target}",
+  "@goalSavedOf": {
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalRemaining": "{amount} to go",
+  "@goalRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalPerMonth": "Save {amount} per month",
+  "@goalPerMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "goalDueBy": "By {date}",
+  "@goalDueBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalOverdue": "The target date has passed",
+  "goalReached": "Goal reached",
+  "goalAddMoney": "Add money",
+  "goalAmountRequired": "Enter an amount",
+  "goalHistory": "Savings so far",
+  "goalNoHistory": "No money added yet.",
+  "goalDeleteTitle": "Delete this goal?",
+  "goalDeleteBody": "Its savings history will be removed too.",
+  "recurringTitle": "Recurring entries",
+  "recurringEmpty": "Salary, rent, and subscriptions can repeat by themselves.",
+  "recurringNew": "New recurring entry",
+  "recurringEdit": "Edit recurring entry",
+  "recurringAdd": "Add recurring entry",
+  "recurringNext": "Next: {date}",
+  "@recurringNext": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "recurringFirstDate": "First date",
+  "recurringFrequency": "Repeats",
+  "frequencyWeekly": "Weekly",
+  "frequencyMonthly": "Monthly",
+  "recurringActive": "Active",
+  "recurringAmount": "Amount",
+  "recurringDeleteTitle": "Delete this recurring entry?",
+  "recurringDeleteBody": "Entries already created stay in your list.",
+  "recurringPaused": "Paused",
+  "reportLeftOver": "Left over",
+  "reportNoSpending": "No spending this month.",
+  "reportLess": "Spent {amount} less than last month",
+  "@reportLess": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportMore": "Spent {amount} more than last month",
+  "@reportMore": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportSame": "Spent the same as last month",
+  "reportNoLast": "No entries last month to compare with.",
+  "reportExportMonth": "Export this month (CSV)",
+  "settingsCurrency": "Currency",
+  "settingsCurrencyLocked": "Can't change after you add entries or a plan.",
+  "settingsRecurring": "Recurring entries",
+  "settingsExportCsv": "Export all entries (CSV)",
+  "settingsBackup": "Back up your data",
+  "settingsBackupHint": "Saves everything to one file you can keep in Drive or send to yourself.",
+  "settingsRestore": "Restore from a backup",
+  "settingsData": "Your data",
+  "settingsAbout": "About Thavika",
+  "settingsAboutBody": "Notes your spending, plans your month, and helps you save.",
+  "nothingToExport": "There are no entries to export yet.",
+  "restoreConfirmTitle": "Replace your data?",
+  "restoreConfirmBody": "Everything on this phone will be replaced by the backup. This can't be undone.",
+  "restoreAction": "Replace",
+  "restoreDone": "Backup restored",
+  "restoreFailed": "That file isn't a Thavika backup.",
+  "sheetShareFailed": "Couldn't open the share sheet.",
+  "entryQuickHint": "Type it: coffee 2.5",
+  "entryQuickApply": "Fill the form",
+  "entryRepeat": "Repeat",
+  "entryWallet": "Wallet",
+  "entryChooseWallet": "Choose a wallet",
+  "entryTags": "Tags",
+  "entryTagsNone": "No tags yet. Type a name to create one.",
+  "entryNewTag": "New tag",
+  "entryAddTag": "Add tag",
+  "entryReceipt": "Receipt",
+  "entryReceiptTake": "Take a photo",
+  "entryReceiptChoose": "Choose from photos",
+  "entryReceiptRemove": "Remove the photo",
+  "entrySplit": "Split",
+  "entrySplitTitle": "Split between categories",
+  "entrySplitAddPart": "Add a part",
+  "entrySplitPickCategory": "Category",
+  "entrySplitLeft": "Left to assign: {amount}",
+  "@entrySplitLeft": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "entrySplitOver": "Over by {amount}",
+  "@entrySplitOver": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "entrySplitDone": "Every part is assigned",
+  "entrySplitIncomplete": "Give every part a category and an amount",
+  "entrySplitMismatch": "The parts must add up to the total",
+  "entrySplitNeedAmount": "Enter the total amount first",
+  "entryDuplicated": "Entry copied to today",
+  "entryDuplicate": "Copy to today",
+  "settingsWallets": "Wallets",
+  "settingsTags": "Tags",
+  "walletsTitle": "Wallets",
+  "walletsTotal": "Total in your wallets",
+  "walletNew": "New wallet",
+  "walletEdit": "Edit wallet",
+  "walletName": "Wallet name",
+  "walletNameRequired": "Enter a name",
+  "walletKind": "Type",
+  "walletKindCash": "Cash",
+  "walletKindBank": "Bank",
+  "walletKindEwallet": "E-wallet",
+  "walletKindOther": "Other",
+  "walletStarting": "Money in it at the start",
+  "walletArchive": "Hide this wallet",
+  "walletArchived": "Hidden",
+  "walletDeleteTitle": "Delete this wallet?",
+  "walletDeleteBody": "Its entries move to the wallet you pick.",
+  "walletMoveTo": "Move entries to",
+  "walletOnlyOne": "You need at least one wallet.",
+  "walletMoveMoney": "Move money",
+  "walletNeedTwo": "Add a second wallet to move money between wallets.",
+  "transferTitle": "Move money",
+  "transferEdit": "Edit transfer",
+  "transferFrom": "From",
+  "transferTo": "To",
+  "transferSame": "Pick two different wallets",
+  "transferAmountRequired": "Enter an amount",
+  "transferRecent": "Recent transfers",
+  "transferNone": "No transfers yet.",
+  "transferLine": "{from} to {to}",
+  "@transferLine": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "transferDeleted": "Transfer deleted",
+  "tagsTitle": "Tags",
+  "tagsEmpty": "Tags group entries, like #trip or #wedding.",
+  "tagNew": "New tag",
+  "tagRename": "Rename tag",
+  "tagName": "Tag name",
+  "tagDeleteTitle": "Delete this tag?",
+  "tagDeleteBody": "It is removed from every entry.",
+  "filterWallet": "Wallet",
+  "filterTag": "Tag",
+  "filterAnyWallet": "All wallets",
+  "filterAnyTag": "All tags",
+  "homeWallets": "Wallets",
+  "entryVoiceStart": "Speak your entry",
+  "entryVoiceStop": "Stop listening",
+  "entryVoiceListening": "Listening...",
+  "entryVoiceUnavailable": "Voice input isn't available. Check the microphone and speech permissions.",
+  "settingsCategories": "Categories",
+  "categoriesTitle": "Categories",
+  "categoryBuiltIn": "Built in",
+  "categoryEntries": "{count, plural, =0{No entries} =1{1 entry} other{{count} entries}}",
+  "@categoryEntries": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryEdit": "Edit category",
+  "categoryShowInAdd": "Show when adding",
+  "categoryDeleteTitle": "Delete this category?",
+  "categoryDeleteBody": "Entries, repeats and plan lines in it move to the category you pick.",
+  "categoryMoveTo": "Move them to",
+  "categoryNone": "No categories here.",
+  "settingsLanguage": "Language",
+  "languageSystem": "Phone language",
+  "languageEnglish": "English",
+  "languageKhmer": "ខ្មែរ",
+  "setupWelcomeTitle": "Welcome to Thavika",
+  "setupWelcomeBody": "A minute of setup, then you are ready. You can change everything later.",
+  "setupStepOf": "Step {step} of {total}",
+  "@setupStepOf": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "setupCurrencyTitle": "Which currency do you use?",
+  "setupCurrencyBody": "You cannot change this after you add your first entry.",
+  "setupWalletTitle": "How much money do you have now?",
+  "setupWalletBody": "Cash and bank together. A rough number is fine. You can add more wallets later.",
+  "setupIncomeTitle": "Your monthly money",
+  "setupRentLabel": "Rent or housing per month",
+  "setupFoodLabel": "Food per month",
+  "setupCostsHint": "Leave out what you do not know. We will use typical amounts.",
+  "setupAdviceTitle": "Which plan fits you?",
+  "setupShareLine": "Rent and food are {percent}% of your income.",
+  "@setupShareLine": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "setupAdviceBalanced": "That leaves room for wants and savings, so 50 / 30 / 20 fits you.",
+  "setupAdviceSeventy": "That is a big part of your income, so 70 / 20 / 10 is more realistic.",
+  "setupAdviceCustom": "That takes most of your income. Start with your own plan and add what you can.",
+  "setupRecommended": "Suggested",
+  "setupNext": "Next",
+  "setupBack": "Back",
+  "setupFinish": "Create my plan",
+  "setupSkipPlan": "Start without a plan",
+  "settingsLock": "App lock",
+  "lockStatusOn": "On",
+  "lockStatusOff": "Off",
+  "lockChangePin": "Change PIN",
+  "lockUseBiometric": "Unlock with fingerprint or face",
+  "lockTurnOff": "Turn off app lock",
+  "lockEnterCurrent": "Enter your current PIN",
+  "lockEnterNew": "Choose a 4-digit PIN",
+  "lockConfirmNew": "Enter the PIN again",
+  "lockMismatch": "The PINs do not match. Try again.",
+  "lockWrong": "Wrong PIN",
+  "lockWait": "Too many tries. Try again in {seconds} s.",
+  "@lockWait": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "lockTitle": "Thavika is locked",
+  "lockEnterPin": "Enter your PIN",
+  "lockBiometricReason": "Unlock Thavika",
+  "lockBiometricButton": "Use fingerprint or face",
+  "lockForgotWarning": "If you forget your PIN, you cannot open the app. Make a backup first.",
+  "lockIsOn": "App lock is on",
+  "lockIsOff": "App lock is off",
+  "notifSavingsBody": "You planned to save {amount} this month. Time to move it to your goals?",
+  "@notifSavingsBody": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "notifSavingsGeneric": "Time to move this month's savings to your goals.",
+  "notifMonthEndBody": "The month is ending. Open Thavika to see how it went.",
+  "notifBillBody": "{name}: {amount} is due on {date}.",
+  "@notifBillBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "remindersDailyHint": "Only when you have not recorded anything that day",
+  "remindersSavings": "Move your savings",
+  "remindersSavingsHint": "On the 5th and 20th, if the planned saving is not moved yet",
+  "remindersMonthEnd": "End of month",
+  "remindersMonthEndHint": "An evening reminder on the last day of the month",
+  "remindersBills": "Bills due",
+  "remindersBillsHint": "For recurring entries you mark as a bill",
+  "remindersWarnings": "Spending warnings",
+  "remindersWarningsHint": "When a category goes off the plan, at most 2 a day",
+  "settingsReminders": "Reminders",
+  "recurringIsBill": "This is a bill",
+  "recurringIsBillHint": "Remind me before it is due",
+  "recurringRemindDays": "{days, plural, =0{Remind me on the day} =1{Remind me 1 day before} other{Remind me {days} days before}}",
+  "@recurringRemindDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "payFirstTitle": "Pay yourself first",
+  "payFirstBody": "You added {income}. Your plan says to set aside {amount} for your goals.",
+  "@payFirstBody": {
+    "placeholders": {
+      "income": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payFirstGoal": "Goal",
+  "payFirstSet": "Set aside",
+  "payFirstSkip": "Not now",
+  "planGoalsTitle": "Goals first",
+  "planGoalsBody": "Your goals need {amount} a month, {percent}% of your income.",
+  "@planGoalsBody": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "planGoalsFit": "Fit my plan to my goals",
+  "planGoalsHigh": "That is a lot. Moving the date of a goal makes it lighter.",
+  "planNameLabel": "Plan name (optional)",
+  "adviceTitle": "Adjust to real life",
+  "adviceBody": "Your last months ran differently from the plan. These moves would fit it better:",
+  "adviceMove": "Move {amount} from {from} to {to}",
+  "@adviceMove": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "adviceApply": "Update my plan",
+  "adviceDismiss": "Not now",
+  "advicePlanUpdated": "Plan updated",
+  "plansTitle": "My plans",
+  "plansSaveCurrent": "Save this plan as...",
+  "plansNameHint": "Plan name",
+  "plansEmpty": "Save your plan with a name to switch back to it later, for example for a month with less income.",
+  "plansUse": "Use for this month",
+  "plansUseBody": "\"{name}\" becomes your plan from this month on. Earlier months keep their plan.",
+  "@plansUseBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "plansDeleteTitle": "Delete this saved plan?",
+  "plansDeleteBody": "Your current plan is not changed.",
+  "plansSaved": "Plan saved",
+  "plansSwitched": "Plan changed",
+  "plansIncome": "Income {amount}",
+  "@plansIncome": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planUnnamed": "Your plan",
+  "billsTitle": "Bills and subscriptions",
+  "billsEmpty": "Add rent, internet, phone or a subscription and Thavika reminds you before it is due.",
+  "billsAdd": "Add a bill",
+  "billsMonthly": "About {amount} a month",
+  "@billsMonthly": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "billDueToday": "Due today",
+  "billDueIn": "{days, plural, =1{Due tomorrow} other{Due in {days} days}}",
+  "@billDueIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billOverdue": "{days, plural, =1{1 day overdue} other{{days} days overdue}}",
+  "@billOverdue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billMarkPaid": "Mark paid",
+  "billPaidTitle": "How much did you pay?",
+  "billPaidDone": "Marked as paid",
+  "recurringAutoCreate": "Add the entry by itself on the due date",
+  "recurringAutoCreateOff": "Off: I mark it paid myself, good for bills that change",
+  "challengeStart": "Start a saving challenge",
+  "challengeKindStepUp": "Step up: week 1 saves 1 unit, week 2 saves 2, week 3 saves 3...",
+  "challengeKindFixed": "Same amount every week",
+  "challengeUnit": "Amount of one unit",
+  "challengeWeeks": "Number of weeks",
+  "challengeTotalHint": "In total this saves {amount}.",
+  "@challengeTotalHint": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "challengeCreate": "Start",
+  "challengeStepUpTitle": "Step-up challenge",
+  "challengeFixedTitle": "Weekly challenge",
+  "challengeStreak": "{weeks, plural, =0{No streak yet} =1{1 week in a row} other{{weeks} weeks in a row}}",
+  "@challengeStreak": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "challengeBehind": "{weeks, plural, =1{1 week behind} other{{weeks} weeks behind}}",
+  "@challengeBehind": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "challengeDone": "{done} of {total} weeks done",
+  "@challengeDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "challengeStepTip": "Week {week}: {amount}",
+  "@challengeStepTip": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "challengeStop": "Stop this challenge",
+  "challengeStopBody": "The money already saved stays in your goal.",
+  "debtsTitle": "Debts and money lent",
+  "debtsEmpty": "Note money you lent or money you owe, and mark it paid back little by little.",
+  "debtAdd": "Add a debt",
+  "debtEditTitle": "Edit debt",
+  "debtOwedToMe": "Owed to you",
+  "debtIOwe": "You owe",
+  "debtLent": "I lent money",
+  "debtBorrowed": "I borrowed money",
+  "debtPerson": "Who",
+  "debtPersonRequired": "Enter a name",
+  "debtAmount": "Amount",
+  "debtStarted": "Date",
+  "debtDue": "Due date (optional)",
+  "debtNoDue": "No due date",
+  "debtLeft": "{amount} left",
+  "@debtLeft": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "debtPaidOf": "{paid} of {total} paid back",
+  "@debtPaidOf": {
+    "placeholders": {
+      "paid": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "debtSettled": "Settled",
+  "debtOverdue": "Overdue",
+  "debtDueOn": "Due {date}",
+  "@debtDueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "debtAddPayment": "Add a payment",
+  "debtPayments": "Payments",
+  "debtNoPayments": "No payments yet.",
+  "debtDeleteTitle": "Delete this debt?",
+  "debtDeleteBody": "Its payments are deleted too, and your wallet goes back to how it was before.",
+  "netWorthTitle": "Net worth",
+  "netWorthWallets": "In your wallets",
+  "netWorthGoals": "Moved to goals",
+  "netWorthHint": "Wallets, plus money moved to goals, plus what others owe you, minus what you owe.",
+  "reportDaily": "Spending per day",
+  "reportTrend": "Last 6 months",
+  "reportByWallet": "By wallet",
+  "reportByTag": "By tag",
+  "reportByTagHint": "An entry with two tags counts for both.",
+  "reportExportExcel": "Export this month (Excel)",
+  "settingsExportExcel": "Export all entries (Excel)",
+  "reportBusiestDay": "Most spent on {date}: {amount}",
+  "@reportBusiestDay": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetSafeLabel": "Safe to spend today"
+}

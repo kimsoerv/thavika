@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">Safe to spend today and a quick add button</string>
+    <string name="widget_label_default">Thavika</string>
+    <string name="widget_amount_default">--</string>
+    <string name="widget_add_description">Add an entry</string>
+</resources>
