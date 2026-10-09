@@ -6,6 +6,7 @@ import '../../../core/money/money.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/ui/category_visuals.dart';
 import '../../../l10n/gen/app_localizations.dart';
+import '../../sync/presentation/sync_badge.dart';
 import '../../plan/domain/plan_check.dart';
 import '../../plan/presentation/plan_labels.dart';
 import '../../shell/presentation/shell_controller.dart';
@@ -38,6 +39,7 @@ class HomePage extends GetView<HomeController> {
                     style: theme.textTheme.titleLarge,
                   ),
                 ),
+                const SyncBadge(),
                 IconButton(
                   tooltip: l10n.settingsTitle,
                   icon: const Icon(Icons.settings_outlined),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'app.dart';
 import 'core/db/app_database.dart';
 import 'core/services/settings_service.dart';
+import 'features/auth/application/auth_service.dart';
 import 'features/debts/data/debt_repository.dart';
 import 'features/entry/application/entry_meta_service.dart';
 import 'features/entry/data/category_repository.dart';
@@ -19,6 +20,7 @@ import 'features/plan/data/plan_repository.dart';
 import 'features/recurring/application/recurring_service.dart';
 import 'features/recurring/data/recurring_repository.dart';
 import 'features/settings/application/backup_service.dart';
+import 'features/sync/application/sync_service.dart';
 import 'features/tags/data/tag_repository.dart';
 import 'features/transactions/data/transaction_repository.dart';
 import 'features/widget/widget_sync.dart';
@@ -32,6 +34,10 @@ Future<void> main() async {
   final db = Get.put<AppDatabase>(AppDatabase(), permanent: true);
   final settings = await Get.putAsync<SettingsService>(
     () => SettingsService(db).init(),
+    permanent: true,
+  );
+  final auth = await Get.putAsync<AuthService>(
+    () => AuthService().init(),
     permanent: true,
   );
   await Get.putAsync<LockService>(
@@ -87,6 +93,10 @@ Future<void> main() async {
     permanent: true,
   );
 
+  await Get.putAsync<SyncService>(
+    () => SyncService(db, settings, auth).init(),
+    permanent: true,
+  );
   final widgetSync = await Get.putAsync<WidgetSync>(
     () => WidgetSync(budget, settings).init(),
     permanent: true,

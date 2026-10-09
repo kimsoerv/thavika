@@ -8,6 +8,7 @@ import '../../../core/money/money.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/ui/share_file.dart';
 import '../../../l10n/gen/app_localizations.dart';
+import '../../auth/application/auth_service.dart';
 import '../../lock/application/lock_service.dart';
 import '../../lock/presentation/pin_flow_page.dart';
 import '../application/backup_service.dart';
@@ -26,6 +27,22 @@ class SettingsPage extends GetView<SettingsController> {
       body: SafeArea(
         child: ListView(
           children: [
+            ListTile(
+              leading: const Icon(Icons.cloud_outlined),
+              title: Text(l10n.accountTitle),
+              subtitle: Obx(() {
+                final auth = Get.find<AuthService>();
+                if (!auth.isConfigured) return Text(l10n.accountGuest);
+                return Text(
+                  auth.isSignedIn
+                      ? (auth.email ?? l10n.accountTitle)
+                      : l10n.accountGuest,
+                );
+              }),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Get.toNamed(Routes.account),
+            ),
+            const Divider(height: 1),
             Obx(() {
               final locked = controller.hasData.value;
               final code = controller.settings.currency.value;

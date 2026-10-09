@@ -2611,6 +2611,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Safe to spend today'**
   String get widgetSafeLabel;
+
+  /// No description provided for @accountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account and sync'**
+  String get accountTitle;
+
+  /// No description provided for @accountGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Using without an account'**
+  String get accountGuest;
+
+  /// No description provided for @accountGuestBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays on this phone. Sign in to back it up and use it on more phones.'**
+  String get accountGuestBody;
+
+  /// No description provided for @accountSignInGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
+  String get accountSignInGoogle;
+
+  /// No description provided for @accountNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync is not set up in this version of the app.'**
+  String get accountNotConfigured;
+
+  /// No description provided for @accountSignedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {email}'**
+  String accountSignedInAs(String email);
+
+  /// No description provided for @syncStatusSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything is saved to your account'**
+  String get syncStatusSynced;
+
+  /// No description provided for @syncStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 change waiting to sync} other{{count} changes waiting to sync}}'**
+  String syncStatusPending(int count);
+
+  /// No description provided for @syncStatusSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing...'**
+  String get syncStatusSyncing;
+
+  /// No description provided for @syncStatusOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Changes are saved on the phone and sync later.'**
+  String get syncStatusOffline;
+
+  /// No description provided for @syncStatusError.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync problem: {error}'**
+  String syncStatusError(String error);
+
+  /// No description provided for @syncLast.
+  ///
+  /// In en, this message translates to:
+  /// **'Last synced {time}'**
+  String syncLast(String time);
+
+  /// No description provided for @syncNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync now'**
+  String get syncNow;
+
+  /// No description provided for @accountSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get accountSignOut;
+
+  /// No description provided for @accountSignOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays on this phone. Sync stops until you sign in again.'**
+  String get accountSignOutBody;
+
+  /// No description provided for @accountDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get accountDelete;
+
+  /// No description provided for @accountDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This deletes your account and everything stored in the cloud. The data on this phone stays. This cannot be undone.'**
+  String get accountDeleteBody;
+
+  /// No description provided for @accountOtherDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Another account\'s data is on this phone'**
+  String get accountOtherDataTitle;
+
+  /// No description provided for @accountOtherDataBody.
+  ///
+  /// In en, this message translates to:
+  /// **'To sign in, that data is removed from this phone. It stays safe in its own account. Continue?'**
+  String get accountOtherDataBody;
+
+  /// No description provided for @accountOtherDataContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Erase and sign in'**
+  String get accountOtherDataContinue;
+
+  /// No description provided for @accountAdoptNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your entries on this phone will be added to your account.'**
+  String get accountAdoptNote;
+
+  /// No description provided for @accountSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in failed: {error}'**
+  String accountSignInFailed(String error);
 }
 
 class _AppLocalizationsDelegate

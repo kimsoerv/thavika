@@ -1446,4 +1446,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get widgetSafeLabel => 'Safe to spend today';
+
+  @override
+  String get accountTitle => 'Account and sync';
+
+  @override
+  String get accountGuest => 'Using without an account';
+
+  @override
+  String get accountGuestBody =>
+      'Your data stays on this phone. Sign in to back it up and use it on more phones.';
+
+  @override
+  String get accountSignInGoogle => 'Sign in with Google';
+
+  @override
+  String get accountNotConfigured =>
+      'Sync is not set up in this version of the app.';
+
+  @override
+  String accountSignedInAs(String email) {
+    return 'Signed in as $email';
+  }
+
+  @override
+  String get syncStatusSynced => 'Everything is saved to your account';
+
+  @override
+  String syncStatusPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count changes waiting to sync',
+      one: '1 change waiting to sync',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get syncStatusSyncing => 'Syncing...';
+
+  @override
+  String get syncStatusOffline =>
+      'No internet. Changes are saved on the phone and sync later.';
+
+  @override
+  String syncStatusError(String error) {
+    return 'Sync problem: $error';
+  }
+
+  @override
+  String syncLast(String time) {
+    return 'Last synced $time';
+  }
+
+  @override
+  String get syncNow => 'Sync now';
+
+  @override
+  String get accountSignOut => 'Sign out';
+
+  @override
+  String get accountSignOutBody =>
+      'Your data stays on this phone. Sync stops until you sign in again.';
+
+  @override
+  String get accountDelete => 'Delete my account';
+
+  @override
+  String get accountDeleteBody =>
+      'This deletes your account and everything stored in the cloud. The data on this phone stays. This cannot be undone.';
+
+  @override
+  String get accountOtherDataTitle =>
+      'Another account\'s data is on this phone';
+
+  @override
+  String get accountOtherDataBody =>
+      'To sign in, that data is removed from this phone. It stays safe in its own account. Continue?';
+
+  @override
+  String get accountOtherDataContinue => 'Erase and sign in';
+
+  @override
+  String get accountAdoptNote =>
+      'Your entries on this phone will be added to your account.';
+
+  @override
+  String accountSignInFailed(String error) {
+    return 'Sign-in failed: $error';
+  }
 }

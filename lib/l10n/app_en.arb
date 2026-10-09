@@ -796,5 +796,62 @@
       }
     }
   },
-  "widgetSafeLabel": "Safe to spend today"
+  "widgetSafeLabel": "Safe to spend today",
+  "accountTitle": "Account and sync",
+  "accountGuest": "Using without an account",
+  "accountGuestBody": "Your data stays on this phone. Sign in to back it up and use it on more phones.",
+  "accountSignInGoogle": "Sign in with Google",
+  "accountNotConfigured": "Sync is not set up in this version of the app.",
+  "accountSignedInAs": "Signed in as {email}",
+  "@accountSignedInAs": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "syncStatusSynced": "Everything is saved to your account",
+  "syncStatusPending": "{count, plural, =1{1 change waiting to sync} other{{count} changes waiting to sync}}",
+  "@syncStatusPending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncStatusSyncing": "Syncing...",
+  "syncStatusOffline": "No internet. Changes are saved on the phone and sync later.",
+  "syncStatusError": "Sync problem: {error}",
+  "@syncStatusError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "syncLast": "Last synced {time}",
+  "@syncLast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "syncNow": "Sync now",
+  "accountSignOut": "Sign out",
+  "accountSignOutBody": "Your data stays on this phone. Sync stops until you sign in again.",
+  "accountDelete": "Delete my account",
+  "accountDeleteBody": "This deletes your account and everything stored in the cloud. The data on this phone stays. This cannot be undone.",
+  "accountOtherDataTitle": "Another account's data is on this phone",
+  "accountOtherDataBody": "To sign in, that data is removed from this phone. It stays safe in its own account. Continue?",
+  "accountOtherDataContinue": "Erase and sign in",
+  "accountAdoptNote": "Your entries on this phone will be added to your account.",
+  "accountSignInFailed": "Sign-in failed: {error}",
+  "@accountSignInFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

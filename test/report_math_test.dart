@@ -19,21 +19,23 @@ ReportTx tx(
 void main() {
   final march = DateTime(2026, 3);
 
-  test('daily spending has one slot per day and ignores income and other months',
-      () {
-    final list = [
-      tx('a', 'expense', 100, DateTime(2026, 3, 1)),
-      tx('b', 'expense', 50, DateTime(2026, 3, 1)),
-      tx('c', 'expense', 70, DateTime(2026, 3, 31)),
-      tx('d', 'income', 999, DateTime(2026, 3, 2)),
-      tx('e', 'expense', 888, DateTime(2026, 4, 1)),
-    ];
-    final days = ReportMath.dailySpending(list, march);
-    expect(days.length, 31);
-    expect(days[0], 150);
-    expect(days[30], 70);
-    expect(days[1], 0);
-  });
+  test(
+    'daily spending has one slot per day and ignores income and other months',
+    () {
+      final list = [
+        tx('a', 'expense', 100, DateTime(2026, 3, 1)),
+        tx('b', 'expense', 50, DateTime(2026, 3, 1)),
+        tx('c', 'expense', 70, DateTime(2026, 3, 31)),
+        tx('d', 'income', 999, DateTime(2026, 3, 2)),
+        tx('e', 'expense', 888, DateTime(2026, 4, 1)),
+      ];
+      final days = ReportMath.dailySpending(list, march);
+      expect(days.length, 31);
+      expect(days[0], 150);
+      expect(days[30], 70);
+      expect(days[1], 0);
+    },
+  );
 
   test('February length follows the year', () {
     expect(ReportMath.dailySpending([], DateTime(2028, 2)).length, 29);

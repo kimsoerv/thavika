@@ -518,6 +518,41 @@ class AppDatabase extends _$AppDatabase {
     });
   }
 
+  /// Makes sure at least one wallet exists (a new account on an empty phone
+  /// has none until it gets one). Returns the first wallet's id.
+  Future<String> ensureDefaultWallet(String currency) async {
+    final existing = await defaultWalletId();
+    return existing ?? await _createDefaultWallet(currency);
+  }
+
+  /// Erases everything the user entered (not the settings) and puts the
+  /// built-in categories and one empty wallet back.
+  Future<void> resetData(String currency) async {
+    await transaction(() async {
+      for (final table in <TableInfo<Table, dynamic>>[
+        transactionTags,
+        transactions,
+        transfers,
+        goalContributions,
+        challenges,
+        goals,
+        planItems,
+        plans,
+        recurringRules,
+        debtPayments,
+        debts,
+        tags,
+        wallets,
+        categories,
+        outbox,
+      ]) {
+        await delete(table).go();
+      }
+      await _seedCategories();
+      await _createDefaultWallet(currency);
+    });
+  }
+
   /// Adds a change to the outbox. Call it inside the same database
   /// transaction that writes the row.
   Future<void> enqueue(String table, String rowId, String op) {

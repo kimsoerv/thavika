@@ -1450,4 +1450,94 @@ class AppLocalizationsKm extends AppLocalizations {
 
   @override
   String get widgetSafeLabel => 'ចំណាយបានថ្ងៃនេះ';
+
+  @override
+  String get accountTitle => 'គណនី និងការធ្វើសមកាលកម្ម';
+
+  @override
+  String get accountGuest => 'កំពុងប្រើដោយគ្មានគណនី';
+
+  @override
+  String get accountGuestBody =>
+      'ទិន្នន័យរបស់អ្នកនៅលើទូរសព្ទនេះ។ ចូលគណនីដើម្បីបម្រុងទុក និងប្រើវាលើទូរសព្ទច្រើនទៀត។';
+
+  @override
+  String get accountSignInGoogle => 'ចូលជាមួយ Google';
+
+  @override
+  String get accountNotConfigured =>
+      'ការធ្វើសមកាលកម្មមិនទាន់បានរៀបចំនៅក្នុងកំណែនេះទេ។';
+
+  @override
+  String accountSignedInAs(String email) {
+    return 'បានចូលគណនីជា $email';
+  }
+
+  @override
+  String get syncStatusSynced =>
+      'អ្វីៗទាំងអស់ត្រូវបានរក្សាទុកក្នុងគណនីរបស់អ្នក';
+
+  @override
+  String syncStatusPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'មាន $count ការផ្លាស់ប្តូរកំពុងរង់ចាំ',
+      one: 'មាន 1 ការផ្លាស់ប្តូរកំពុងរង់ចាំ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get syncStatusSyncing => 'កំពុងធ្វើសមកាលកម្ម...';
+
+  @override
+  String get syncStatusOffline =>
+      'គ្មានអ៊ីនធឺណិត។ ការផ្លាស់ប្តូរត្រូវបានរក្សាទុកលើទូរសព្ទ ហើយនឹងធ្វើសមកាលកម្មពេលក្រោយ។';
+
+  @override
+  String syncStatusError(String error) {
+    return 'បញ្ហាសមកាលកម្ម៖ $error';
+  }
+
+  @override
+  String syncLast(String time) {
+    return 'សមកាលកម្មចុងក្រោយ $time';
+  }
+
+  @override
+  String get syncNow => 'ធ្វើសមកាលកម្មឥឡូវនេះ';
+
+  @override
+  String get accountSignOut => 'ចាកចេញ';
+
+  @override
+  String get accountSignOutBody =>
+      'ទិន្នន័យរបស់អ្នកនៅលើទូរសព្ទនេះ។ ការធ្វើសមកាលកម្មឈប់រហូតដល់អ្នកចូលម្តងទៀត។';
+
+  @override
+  String get accountDelete => 'លុបគណនីរបស់ខ្ញុំ';
+
+  @override
+  String get accountDeleteBody =>
+      'នេះលុបគណនីរបស់អ្នក និងអ្វីៗទាំងអស់ដែលរក្សាទុកក្នុងពពក។ ទិន្នន័យលើទូរសព្ទនេះនៅដដែល។ មិនអាចត្រឡប់វិញបានទេ។';
+
+  @override
+  String get accountOtherDataTitle => 'ទិន្នន័យរបស់គណនីផ្សេងនៅលើទូរសព្ទនេះ';
+
+  @override
+  String get accountOtherDataBody =>
+      'ដើម្បីចូលគណនី ទិន្នន័យនោះនឹងត្រូវដកចេញពីទូរសព្ទនេះ។ វានៅតែមានសុវត្ថិភាពក្នុងគណនីរបស់វា។ បន្ត?';
+
+  @override
+  String get accountOtherDataContinue => 'លុប ហើយចូលគណនី';
+
+  @override
+  String get accountAdoptNote =>
+      'កំណត់ត្រារបស់អ្នកលើទូរសព្ទនេះនឹងត្រូវបន្ថែមទៅគណនីរបស់អ្នក។';
+
+  @override
+  String accountSignInFailed(String error) {
+    return 'ការចូលគណនីបរាជ័យ៖ $error';
+  }
 }

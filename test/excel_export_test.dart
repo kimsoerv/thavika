@@ -88,7 +88,10 @@ void main() {
 
   test('the range limits the sheet', () async {
     final book = Excel.decodeBytes(
-      (await service.buildXlsx(from: DateTime(2026, 10), to: DateTime(2026, 11)))!,
+      (await service.buildXlsx(
+        from: DateTime(2026, 10),
+        to: DateTime(2026, 11),
+      ))!,
     );
     expect(book['Entries'].maxRows, 3);
   });
