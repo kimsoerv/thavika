@@ -75,6 +75,26 @@ void main() {
       },
     );
 
+    test('the receipt photo stays on the phone that took it', () async {
+      final id = await a.tx.add(
+        type: 'expense',
+        amountMinor: 450,
+        currency: 'USD',
+        categoryId: 'cat_food',
+        note: '',
+        date: DateTime(2026, 3, 9),
+        receiptPath: '/data/receipts/r1.jpg',
+      );
+
+      // Push, then pull the same row back from the server.
+      await a.engine.run();
+
+      expect(server.rows('transactions').single['receipt_path'], equals(null));
+      final local = (await a.entries()).single;
+      expect(local.id, id);
+      expect(local.receiptPath, '/data/receipts/r1.jpg');
+    });
+
     test('an edit and a delete reach the server', () async {
       final id = await a.addExpense(450);
       await a.engine.run();
@@ -229,6 +249,24 @@ void main() {
       await a.engine.run();
       await b.engine.run();
       expect((await b.entries()).single.deletedAt, isNotNull);
+    });
+
+    test('undoing a delete reaches the other phone', () async {
+      final id = await a.addExpense(450);
+      await a.engine.run();
+      await b.engine.run();
+
+      await a.tx.softDelete(id);
+      await a.engine.run();
+      await b.engine.run();
+      expect((await b.entries()).single.deletedAt, isNotNull);
+
+      await Future<void>.delayed(const Duration(milliseconds: 1100));
+      await a.tx.restore(id);
+      await a.engine.run();
+      await b.engine.run();
+      expect((await a.entries()).single.deletedAt, equals(null));
+      expect((await b.entries()).single.deletedAt, equals(null));
     });
 
     test(

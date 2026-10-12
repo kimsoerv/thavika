@@ -104,6 +104,8 @@ class LockService extends GetxService with WidgetsBindingObserver {
   static const _bioKey = 'lock_biometric';
   static const _hashKey = 'lock_pin_hash';
   static const _saltKey = 'lock_pin_salt';
+  static const _failuresKey = 'lock_failures';
+  static const _waitUntilKey = 'lock_wait_until';
 
   /// A PIN is set.
   final enabled = false.obs;
@@ -124,6 +126,14 @@ class LockService extends GetxService with WidgetsBindingObserver {
   Future<LockService> init() async {
     enabled.value = await _settings.getString(_enabledKey) == '1';
     biometric.value = await _settings.getString(_bioKey) == '1';
+    // Closing the app must not give the guesser a fresh set of tries.
+    final failures = await _settings.getString(_failuresKey);
+    _failures = int.tryParse(failures ?? '') ?? 0;
+    final until = int.tryParse(await _settings.getString(_waitUntilKey) ?? '');
+    _waitUntil = until == null
+        ? null
+        : DateTime.fromMillisecondsSinceEpoch(until);
+    waitSeconds.value = remainingWait;
     // Opening the app from scratch asks for the PIN.
     locked.value = enabled.value;
     WidgetsBinding.instance.addObserver(this);
@@ -147,6 +157,14 @@ class LockService extends GetxService with WidgetsBindingObserver {
     }
   }
 
+  Future<void> _saveLockout() async {
+    await _settings.setString(_failuresKey, '$_failures');
+    await _settings.setString(
+      _waitUntilKey,
+      _waitUntil == null ? '' : '${_waitUntil!.millisecondsSinceEpoch}',
+    );
+  }
+
   String _hash(String pin, String salt) =>
       sha256.convert(utf8.encode('$salt:$pin')).toString();
 
@@ -164,6 +182,7 @@ class LockService extends GetxService with WidgetsBindingObserver {
     enabled.value = true;
     _failures = 0;
     _waitUntil = null;
+    await _saveLockout();
   }
 
   Future<void> setBiometric(bool on) async {
@@ -197,6 +216,7 @@ class LockService extends GetxService with WidgetsBindingObserver {
       _failures = 0;
       _waitUntil = null;
       waitSeconds.value = 0;
+      await _saveLockout();
       locked.value = false;
       return PinResult.ok;
     }
@@ -208,6 +228,7 @@ class LockService extends GetxService with WidgetsBindingObserver {
       _waitUntil = _now().add(Duration(seconds: seconds));
       waitSeconds.value = seconds;
     }
+    await _saveLockout();
     return PinResult.wrong;
   }
 
@@ -216,6 +237,9 @@ class LockService extends GetxService with WidgetsBindingObserver {
     final ok = await _bio.authenticate(reason);
     if (ok) {
       _failures = 0;
+      _waitUntil = null;
+      waitSeconds.value = 0;
+      await _saveLockout();
       locked.value = false;
     }
     return ok;
@@ -227,6 +251,10 @@ class LockService extends GetxService with WidgetsBindingObserver {
     await _store.delete(_saltKey);
     await _settings.setString(_enabledKey, '0');
     await _settings.setString(_bioKey, '0');
+    _failures = 0;
+    _waitUntil = null;
+    waitSeconds.value = 0;
+    await _saveLockout();
     enabled.value = false;
     biometric.value = false;
     locked.value = false;

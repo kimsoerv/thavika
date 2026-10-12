@@ -106,6 +106,39 @@ void main() {
     expect(await lock.unlockWithPin('1234'), PinResult.ok);
   });
 
+  test('closing the app does not clear the waiting time', () async {
+    final lock = await make();
+    await lock.setPin('1234');
+    for (var i = 0; i < 5; i++) {
+      await lock.unlockWithPin('0000');
+    }
+
+    final again = await make();
+    expect(again.locked.value, isTrue);
+    expect(again.waitSeconds.value, greaterThan(0));
+    expect(await again.unlockWithPin('1234'), PinResult.waiting);
+
+    now = now.add(const Duration(seconds: 31));
+    expect(await again.unlockWithPin('1234'), PinResult.ok);
+
+    final third = await make();
+    expect(third.waitSeconds.value, 0);
+    expect(await third.unlockWithPin('1234'), PinResult.ok);
+  });
+
+  test('wrong tries before a restart still count', () async {
+    final lock = await make();
+    await lock.setPin('1234');
+    for (var i = 0; i < 3; i++) {
+      await lock.unlockWithPin('0000');
+    }
+    final again = await make();
+    await again.unlockWithPin('0000');
+    await again.unlockWithPin('0000');
+    // The fifth wrong try overall starts the wait.
+    expect(again.waitSeconds.value, 30);
+  });
+
   test('locks again after the grace period in the background', () async {
     final lock = await make();
     await lock.setPin('1234');

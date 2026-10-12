@@ -41,6 +41,7 @@ class _Table<T extends Table, D extends DataClass> implements SyncTable {
     this.fromJson, {
     this.skipWhere = '',
     this.userRowsWhere = '1 = 1',
+    this.keepLocal = const {},
   });
 
   @override
@@ -51,6 +52,10 @@ class _Table<T extends Table, D extends DataClass> implements SyncTable {
   /// SQL condition for rows that are never synced (built-in categories).
   final String skipWhere;
   final String userRowsWhere;
+
+  /// Drift JSON keys that only exist on this phone (never sent to the
+  /// server). A pulled row has them empty, so the local value is kept.
+  final Set<String> keepLocal;
 
   GeneratedColumn<String> get _id =>
       table.columnsByName['id']! as GeneratedColumn<String>;
@@ -71,8 +76,26 @@ class _Table<T extends Table, D extends DataClass> implements SyncTable {
 
   @override
   Future<void> upsert(AppDatabase db, Map<String, dynamic> json) async {
+    if (keepLocal.isNotEmpty) {
+      final existing = await (db.select(
+        table,
+      )..where((_) => _id.equals(json['id'] as String))).getSingleOrNull();
+      if (existing != null) {
+        final local = existing.toJson();
+        json = {
+          ...json,
+          for (final key in keepLocal)
+            if (json[key] == null) key: local[key],
+        };
+      }
+    }
     final row = fromJson(json) as Insertable<D>;
-    await db.into(table).insertOnConflictUpdate(row);
+    // Write every column, empty ones too: a delete that was undone, or a
+    // field that was cleared, must reach this phone. (Inserting the row
+    // itself would skip the empty columns and keep the old values.)
+    await db
+        .into(table)
+        .insertOnConflictUpdate(RawValuesInsertable<D>(row.toColumns(false)));
   }
 
   @override
@@ -148,7 +171,13 @@ List<SyncTable> buildSyncTables(AppDatabase db) => [
   ),
   _Table('challenges', db.challenges, ChallengeRow.fromJson),
   _Table('recurring_rules', db.recurringRules, RecurringRow.fromJson),
-  _Table('transactions', db.transactions, TxRow.fromJson),
+  _Table(
+    'transactions',
+    db.transactions,
+    TxRow.fromJson,
+    // Receipt photos are files on the phone that took them.
+    keepLocal: {'receiptPath'},
+  ),
   _Table('transaction_tags', db.transactionTags, TransactionTagRow.fromJson),
   _Table('transfers', db.transfers, TransferRow.fromJson),
   _Table('debts', db.debts, DebtRow.fromJson),
