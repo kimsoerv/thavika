@@ -22,10 +22,11 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(title: Text(l10n.accountTitle)),
       body: SafeArea(
         child: Obx(() {
+          // Read the observable first: an Obx that reads none throws.
+          final user = auth.user.value;
           if (!auth.isConfigured) {
             return _Message(text: l10n.accountNotConfigured);
           }
-          final user = auth.user.value;
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [

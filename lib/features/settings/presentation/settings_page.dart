@@ -32,12 +32,12 @@ class SettingsPage extends GetView<SettingsController> {
               title: Text(l10n.accountTitle),
               subtitle: Obx(() {
                 final auth = Get.find<AuthService>();
-                if (!auth.isConfigured) return Text(l10n.accountGuest);
-                return Text(
-                  auth.isSignedIn
-                      ? (auth.email ?? l10n.accountTitle)
-                      : l10n.accountGuest,
-                );
+                // Read the observable first: an Obx that reads none throws.
+                final user = auth.user.value;
+                if (!auth.isConfigured || user == null) {
+                  return Text(l10n.accountGuest);
+                }
+                return Text(user.email ?? l10n.accountTitle);
               }),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Get.toNamed(Routes.account),
