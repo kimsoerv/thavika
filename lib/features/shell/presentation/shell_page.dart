@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../home/presentation/home_page.dart';
+import '../../household/application/household_service.dart';
 import '../../plan/presentation/plan_page.dart';
 import '../../reports/presentation/reports_page.dart';
 import '../../transactions/data/transaction_repository.dart';
@@ -40,16 +41,23 @@ class ShellPage extends GetView<ShellController> {
     final l10n = AppLocalizations.of(context);
 
     return Scaffold(
-      body: Obx(
-        () => IndexedStack(
-          index: controller.tab.value,
-          children: const [
-            HomePage(),
-            TransactionsPage(),
-            PlanPage(),
-            ReportsPage(),
-          ],
-        ),
+      body: Column(
+        children: [
+          const _RemovedNotice(),
+          Expanded(
+            child: Obx(
+              () => IndexedStack(
+                index: controller.tab.value,
+                children: const [
+                  HomePage(),
+                  TransactionsPage(),
+                  PlanPage(),
+                  ReportsPage(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Material(
         color: Theme.of(context).colorScheme.surfaceContainer,
@@ -198,5 +206,47 @@ class _NavItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// Said once when the household's owner removed this person.
+class _RemovedNotice extends StatelessWidget {
+  const _RemovedNotice();
+
+  @override
+  Widget build(BuildContext context) {
+    if (!Get.isRegistered<HouseholdService>()) return const SizedBox.shrink();
+    final service = Get.find<HouseholdService>();
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return Obx(() {
+      final name = service.removedFrom.value;
+      if (name == null) return const SizedBox.shrink();
+      return Material(
+        color: theme.colorScheme.secondaryContainer,
+        child: SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.householdRemovedNotice(name),
+                    style: TextStyle(
+                      color: theme.colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => service.removedFrom.value = null,
+                  child: Text(l10n.householdOk),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
   }
 }

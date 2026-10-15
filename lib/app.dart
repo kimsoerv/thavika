@@ -20,6 +20,7 @@ import 'features/plan/presentation/plan_setup_page.dart';
 import 'features/recurring/application/recurring_service.dart';
 import 'features/recurring/data/recurring_repository.dart';
 import 'features/auth/presentation/account_page.dart';
+import 'features/household/presentation/household_page.dart';
 import 'features/debts/data/debt_repository.dart';
 import 'features/debts/presentation/debt_detail_page.dart';
 import 'features/debts/presentation/debt_form_page.dart';
@@ -120,6 +121,7 @@ class ThavikaApp extends StatelessWidget {
           ),
         ),
         GetPage(name: Routes.account, page: () => const AccountPage()),
+        GetPage(name: Routes.household, page: () => const HouseholdPage()),
         GetPage(
           name: Routes.bills,
           page: () => const BillsPage(),

@@ -1548,4 +1548,129 @@ class AppLocalizationsEn extends AppLocalizations {
   String accountSignInFailed(String error) {
     return 'Sign-in failed: $error';
   }
+
+  @override
+  String get householdTitle => 'Household';
+
+  @override
+  String get householdSubtitleNone => 'Share with a partner or family';
+
+  @override
+  String get householdNeedSignIn => 'Sign in to share with someone else.';
+
+  @override
+  String get householdIntro =>
+      'Share one set of entries, plan and goals with your partner or family. Everyone sees the same numbers.';
+
+  @override
+  String get householdStartTitle => 'Start a household';
+
+  @override
+  String get householdNameHint => 'Household name';
+
+  @override
+  String get householdStart => 'Start';
+
+  @override
+  String get householdStartConfirmBody =>
+      'Starting a household shares all your entries, plan and goals with the people you invite.';
+
+  @override
+  String get householdJoinTitle => 'Join with a code';
+
+  @override
+  String get householdCodeHint => 'Invite code';
+
+  @override
+  String get householdJoin => 'Join';
+
+  @override
+  String get householdJoinConfirmTitle => 'Join this household?';
+
+  @override
+  String get householdJoinConfirmBody =>
+      'Joining shares all your entries, plan and goals with this household. Everyone in it will see them.';
+
+  @override
+  String get householdMembers => 'Members';
+
+  @override
+  String get householdOwner => 'Owner';
+
+  @override
+  String get householdYou => 'You';
+
+  @override
+  String get householdInvite => 'Invite someone';
+
+  @override
+  String householdInviteCode(String code) {
+    return 'Invite code: $code';
+  }
+
+  @override
+  String get householdInviteHint =>
+      'Give this code to the person. It works for 7 days.';
+
+  @override
+  String get householdCopy => 'Copy code';
+
+  @override
+  String get householdCopied => 'Code copied';
+
+  @override
+  String get householdRename => 'Rename';
+
+  @override
+  String get householdRemove => 'Remove';
+
+  @override
+  String householdRemoveConfirm(String name) {
+    return 'Remove $name?';
+  }
+
+  @override
+  String householdRemoveBody(String name) {
+    return '$name will no longer see this household. What they added stays here, and they keep a copy of their own entries.';
+  }
+
+  @override
+  String get householdLeave => 'Leave household';
+
+  @override
+  String householdLeaveConfirmTitle(String name) {
+    return 'Leave $name?';
+  }
+
+  @override
+  String get householdLeaveBody =>
+      'You will no longer see the household\'s data. You keep a copy of what you added, and the plan. Everyone else keeps everything.';
+
+  @override
+  String get householdLeaveLast =>
+      'You are the last member. The household will end and everything in it will be yours.';
+
+  @override
+  String get householdErrorCode => 'That code is wrong or has expired.';
+
+  @override
+  String get householdErrorOffline =>
+      'No internet. Try again when you are online.';
+
+  @override
+  String get householdErrorOwner => 'Only the owner can do that.';
+
+  @override
+  String get householdErrorAlready => 'You are already in a household.';
+
+  @override
+  String get householdErrorOther => 'Something went wrong. Try again.';
+
+  @override
+  String householdRemovedNotice(String name) {
+    return 'You are no longer in $name. A copy of what you added is now in your own data.';
+  }
+
+  @override
+  String get householdOk => 'OK';
 }

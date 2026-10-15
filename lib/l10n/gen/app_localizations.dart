@@ -2767,6 +2767,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign-in failed: {error}'**
   String accountSignInFailed(String error);
+
+  /// No description provided for @householdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Household'**
+  String get householdTitle;
+
+  /// No description provided for @householdSubtitleNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Share with a partner or family'**
+  String get householdSubtitleNone;
+
+  /// No description provided for @householdNeedSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to share with someone else.'**
+  String get householdNeedSignIn;
+
+  /// No description provided for @householdIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Share one set of entries, plan and goals with your partner or family. Everyone sees the same numbers.'**
+  String get householdIntro;
+
+  /// No description provided for @householdStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a household'**
+  String get householdStartTitle;
+
+  /// No description provided for @householdNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Household name'**
+  String get householdNameHint;
+
+  /// No description provided for @householdStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get householdStart;
+
+  /// No description provided for @householdStartConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting a household shares all your entries, plan and goals with the people you invite.'**
+  String get householdStartConfirmBody;
+
+  /// No description provided for @householdJoinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join with a code'**
+  String get householdJoinTitle;
+
+  /// No description provided for @householdCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code'**
+  String get householdCodeHint;
+
+  /// No description provided for @householdJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get householdJoin;
+
+  /// No description provided for @householdJoinConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join this household?'**
+  String get householdJoinConfirmTitle;
+
+  /// No description provided for @householdJoinConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Joining shares all your entries, plan and goals with this household. Everyone in it will see them.'**
+  String get householdJoinConfirmBody;
+
+  /// No description provided for @householdMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get householdMembers;
+
+  /// No description provided for @householdOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get householdOwner;
+
+  /// No description provided for @householdYou.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get householdYou;
+
+  /// No description provided for @householdInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite someone'**
+  String get householdInvite;
+
+  /// No description provided for @householdInviteCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code: {code}'**
+  String householdInviteCode(String code);
+
+  /// No description provided for @householdInviteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Give this code to the person. It works for 7 days.'**
+  String get householdInviteHint;
+
+  /// No description provided for @householdCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy code'**
+  String get householdCopy;
+
+  /// No description provided for @householdCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied'**
+  String get householdCopied;
+
+  /// No description provided for @householdRename.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get householdRename;
+
+  /// No description provided for @householdRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get householdRemove;
+
+  /// No description provided for @householdRemoveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name}?'**
+  String householdRemoveConfirm(String name);
+
+  /// No description provided for @householdRemoveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will no longer see this household. What they added stays here, and they keep a copy of their own entries.'**
+  String householdRemoveBody(String name);
+
+  /// No description provided for @householdLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave household'**
+  String get householdLeave;
+
+  /// No description provided for @householdLeaveConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave {name}?'**
+  String householdLeaveConfirmTitle(String name);
+
+  /// No description provided for @householdLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You will no longer see the household\'s data. You keep a copy of what you added, and the plan. Everyone else keeps everything.'**
+  String get householdLeaveBody;
+
+  /// No description provided for @householdLeaveLast.
+  ///
+  /// In en, this message translates to:
+  /// **'You are the last member. The household will end and everything in it will be yours.'**
+  String get householdLeaveLast;
+
+  /// No description provided for @householdErrorCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is wrong or has expired.'**
+  String get householdErrorCode;
+
+  /// No description provided for @householdErrorOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Try again when you are online.'**
+  String get householdErrorOffline;
+
+  /// No description provided for @householdErrorOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Only the owner can do that.'**
+  String get householdErrorOwner;
+
+  /// No description provided for @householdErrorAlready.
+  ///
+  /// In en, this message translates to:
+  /// **'You are already in a household.'**
+  String get householdErrorAlready;
+
+  /// No description provided for @householdErrorOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Try again.'**
+  String get householdErrorOther;
+
+  /// No description provided for @householdRemovedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'You are no longer in {name}. A copy of what you added is now in your own data.'**
+  String householdRemovedNotice(String name);
+
+  /// No description provided for @householdOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get householdOk;
 }
 
 class _AppLocalizationsDelegate

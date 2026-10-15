@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide PostgrestClient;
 
 import '../../../core/config/app_config.dart';
 import '../../../core/db/app_database.dart';
@@ -128,6 +129,45 @@ class SyncService extends GetxService with WidgetsBindingObserver {
     return true;
   }
 
+  // ---- live changes from other people ----
+
+  RealtimeChannel? _live;
+
+  /// While [on], a change another person makes in the household starts a sync
+  /// here within a few seconds, instead of waiting for the next regular one.
+  /// [onMembers] is called when the household's members change.
+  void listenForChanges(bool on, {VoidCallback? onMembers}) {
+    final old = _live;
+    _live = null;
+    if (old != null) {
+      try {
+        Supabase.instance.client.removeChannel(old);
+      } catch (_) {}
+    }
+    final engine = _engine;
+    if (!on || engine == null || !_auth.isSignedIn) return;
+    try {
+      var channel = Supabase.instance.client.channel('household-changes');
+      for (final table in engine.tableNames) {
+        channel = channel.onPostgresChanges(
+          event: PostgresChangeEvent.all,
+          schema: 'public',
+          table: table,
+          callback: (_) => _schedule(),
+        );
+      }
+      channel = channel.onPostgresChanges(
+        event: PostgresChangeEvent.all,
+        schema: 'public',
+        table: 'household_members',
+        callback: (_) => onMembers?.call(),
+      );
+      _live = channel.subscribe();
+    } catch (_) {
+      // Without live updates the regular sync still brings the changes.
+    }
+  }
+
   // ---- running ----
 
   void _schedule() {
@@ -197,6 +237,7 @@ class SyncService extends GetxService with WidgetsBindingObserver {
     _pendingSub?.cancel();
     _netSub?.cancel();
     _userWorker?.dispose();
+    listenForChanges(false);
     super.onClose();
   }
 }

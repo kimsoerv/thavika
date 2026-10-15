@@ -9,6 +9,7 @@ import '../../../core/routes/app_routes.dart';
 import '../../../core/ui/share_file.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../auth/application/auth_service.dart';
+import '../../household/application/household_service.dart';
 import '../../lock/application/lock_service.dart';
 import '../../lock/presentation/pin_flow_page.dart';
 import '../application/backup_service.dart';
@@ -41,6 +42,16 @@ class SettingsPage extends GetView<SettingsController> {
               }),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Get.toNamed(Routes.account),
+            ),
+            ListTile(
+              leading: const Icon(Icons.groups_outlined),
+              title: Text(l10n.householdTitle),
+              subtitle: Obx(() {
+                final household = Get.find<HouseholdService>().info.value;
+                return Text(household?.name ?? l10n.householdSubtitleNone);
+              }),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Get.toNamed(Routes.household),
             ),
             const Divider(height: 1),
             Obx(() {

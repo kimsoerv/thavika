@@ -1552,4 +1552,129 @@ class AppLocalizationsKm extends AppLocalizations {
   String accountSignInFailed(String error) {
     return 'ការចូលគណនីបរាជ័យ៖ $error';
   }
+
+  @override
+  String get householdTitle => 'គ្រួសារ';
+
+  @override
+  String get householdSubtitleNone => 'ចែករំលែកជាមួយដៃគូ ឬគ្រួសារ';
+
+  @override
+  String get householdNeedSignIn => 'ចូលគណនីដើម្បីចែករំលែកជាមួយអ្នកផ្សេង។';
+
+  @override
+  String get householdIntro =>
+      'ចែករំលែកកំណត់ត្រា ផែនការ និងគោលដៅរួមគ្នាជាមួយដៃគូ ឬគ្រួសាររបស់អ្នក។ អ្នករាល់គ្នាឃើញលេខដូចគ្នា។';
+
+  @override
+  String get householdStartTitle => 'បង្កើតគ្រួសារ';
+
+  @override
+  String get householdNameHint => 'ឈ្មោះគ្រួសារ';
+
+  @override
+  String get householdStart => 'បង្កើត';
+
+  @override
+  String get householdStartConfirmBody =>
+      'ការបង្កើតគ្រួសារនឹងចែករំលែកកំណត់ត្រា ផែនការ និងគោលដៅទាំងអស់របស់អ្នកជាមួយអ្នកដែលអ្នកអញ្ជើញ។';
+
+  @override
+  String get householdJoinTitle => 'ចូលរួមដោយប្រើកូដ';
+
+  @override
+  String get householdCodeHint => 'កូដអញ្ជើញ';
+
+  @override
+  String get householdJoin => 'ចូលរួម';
+
+  @override
+  String get householdJoinConfirmTitle => 'ចូលរួមគ្រួសារនេះ?';
+
+  @override
+  String get householdJoinConfirmBody =>
+      'ការចូលរួមនឹងចែករំលែកកំណត់ត្រា ផែនការ និងគោលដៅទាំងអស់របស់អ្នកជាមួយគ្រួសារនេះ។ អ្នករាល់គ្នានឹងឃើញវា។';
+
+  @override
+  String get householdMembers => 'សមាជិក';
+
+  @override
+  String get householdOwner => 'ម្ចាស់';
+
+  @override
+  String get householdYou => 'អ្នក';
+
+  @override
+  String get householdInvite => 'អញ្ជើញនរណាម្នាក់';
+
+  @override
+  String householdInviteCode(String code) {
+    return 'កូដអញ្ជើញ៖ $code';
+  }
+
+  @override
+  String get householdInviteHint =>
+      'ផ្តល់កូដនេះដល់អ្នកនោះ។ វាមានសុពលភាព ៧ ថ្ងៃ។';
+
+  @override
+  String get householdCopy => 'ចម្លងកូដ';
+
+  @override
+  String get householdCopied => 'បានចម្លងកូដ';
+
+  @override
+  String get householdRename => 'ប្តូរឈ្មោះ';
+
+  @override
+  String get householdRemove => 'ដកចេញ';
+
+  @override
+  String householdRemoveConfirm(String name) {
+    return 'ដក $name ចេញ?';
+  }
+
+  @override
+  String householdRemoveBody(String name) {
+    return '$name នឹងលែងឃើញគ្រួសារនេះ។ អ្វីដែលគាត់បានបន្ថែមនៅតែនៅទីនេះ ហើយគាត់រក្សាច្បាប់ចម្លងនៃកំណត់ត្រារបស់ខ្លួន។';
+  }
+
+  @override
+  String get householdLeave => 'ចាកចេញពីគ្រួសារ';
+
+  @override
+  String householdLeaveConfirmTitle(String name) {
+    return 'ចាកចេញពី $name?';
+  }
+
+  @override
+  String get householdLeaveBody =>
+      'អ្នកនឹងលែងឃើញទិន្នន័យរបស់គ្រួសារ។ អ្នករក្សាច្បាប់ចម្លងនៃអ្វីដែលអ្នកបានបន្ថែម និងផែនការ។ អ្នកផ្សេងទៀតរក្សាអ្វីៗទាំងអស់។';
+
+  @override
+  String get householdLeaveLast =>
+      'អ្នកជាសមាជិកចុងក្រោយ។ គ្រួសារនឹងបញ្ចប់ ហើយអ្វីៗទាំងអស់នឹងក្លាយជារបស់អ្នក។';
+
+  @override
+  String get householdErrorCode => 'កូដនោះមិនត្រឹមត្រូវ ឬបានផុតកំណត់។';
+
+  @override
+  String get householdErrorOffline =>
+      'គ្មានអ៊ីនធឺណិត។ សូមព្យាយាមម្តងទៀតពេលមានអ៊ីនធឺណិត។';
+
+  @override
+  String get householdErrorOwner => 'មានតែម្ចាស់ប៉ុណ្ណោះដែលអាចធ្វើបាន។';
+
+  @override
+  String get householdErrorAlready => 'អ្នកនៅក្នុងគ្រួសារមួយរួចហើយ។';
+
+  @override
+  String get householdErrorOther => 'មានបញ្ហាកើតឡើង។ សូមព្យាយាមម្តងទៀត។';
+
+  @override
+  String householdRemovedNotice(String name) {
+    return 'អ្នកលែងនៅក្នុង $name ទៀតហើយ។ ច្បាប់ចម្លងនៃអ្វីដែលអ្នកបានបន្ថែមឥឡូវនៅក្នុងទិន្នន័យរបស់អ្នក។';
+  }
+
+  @override
+  String get householdOk => 'យល់ព្រម';
 }

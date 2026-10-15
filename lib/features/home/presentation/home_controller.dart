@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../core/db/app_database.dart';
 import '../../../core/services/settings_service.dart';
 import '../../entry/application/entry_meta_service.dart';
+import '../../household/application/household_service.dart';
 import '../../plan/application/budget_service.dart';
 import '../../plan/domain/plan_check.dart';
 import '../../transactions/data/transaction_repository.dart';
@@ -45,6 +46,11 @@ class HomeController extends GetxController {
     }
     final tags = meta.tagLabel(e.tx.id);
     if (tags.isNotEmpty) parts.add(tags);
+    // In a household, entries made by someone else show their name.
+    final by = Get.isRegistered<HouseholdService>()
+        ? Get.find<HouseholdService>().addedBy(e.tx.ownerId)
+        : null;
+    if (by != null) parts.add(by);
     return parts.join(' · ');
   }
 

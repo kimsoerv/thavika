@@ -78,13 +78,14 @@ Checked on a real Android phone: sign-in, push to Supabase, reinstall and pull b
 - [ ] Receipt photos in cloud storage (decision needed: phone only, or Supabase storage; today they stay on the phone)
 
 ## Phase C: household
-- [ ] Create household, invite code or link, join with confirmation
-- [ ] Share everything, one household plan with combined income
-- [ ] Members screen, owner role, remove member, no member limit
-- [ ] Leave household (keep a copy of own entries and the plan)
-- [ ] Each entry shows who added it
-- [ ] Live updates between phones
-- [ ] Instant alerts about a partner's spending (push notifications; needs a small server function)
+Built and tested in code (a local Postgres checks the Supabase rules: `supabase/tests/run.sh`). Needs `supabase/migrations/0002_households.sql` run in Supabase, then a test with two Google accounts on two phones.
+- [x] Create household, invite code (7 days), join with confirmation
+- [x] Share everything; the household plan wins when someone joins (their own plans move to their plan library)
+- [x] Members screen, owner role, remove member, no member limit, rename
+- [x] Leave household: keep a copy of what you added and the plan; the household keeps everything; last member leaving ends it and keeps all
+- [x] Each entry shows who added it
+- [x] Live updates between phones (Supabase Realtime while someone else is in the household)
+- [ ] Instant alerts about a partner's spending when the app is closed (push notifications; needs Firebase and a small server function). In-app first, push later.
 
 ## Phase D: Gemini (user's own key)
 - [ ] Settings: paste key, test key, secure storage

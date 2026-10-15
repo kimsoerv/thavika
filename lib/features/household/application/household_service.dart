@@ -42,6 +42,7 @@ class HouseholdService extends GetxService {
   var _refreshing = false;
   Worker? _syncWorker;
   Worker? _userWorker;
+  Worker? _liveWorker;
 
   HouseholdRemote? get _server {
     final existing = _remote;
@@ -62,6 +63,13 @@ class HouseholdService extends GetxService {
     _syncWorker = ever(_sync.lastSyncedAt, (_) => refresh());
     _userWorker = ever(_auth.user, (user) async {
       info.value = user == null ? null : await _local.cached();
+    });
+    // Live updates only matter when someone else is in the household.
+    _liveWorker = ever(info, (household) {
+      _sync.listenForChanges(
+        household != null && household.hasOthers,
+        onMembers: refresh,
+      );
     });
     return this;
   }
@@ -211,6 +219,7 @@ class HouseholdService extends GetxService {
   void onClose() {
     _syncWorker?.dispose();
     _userWorker?.dispose();
+    _liveWorker?.dispose();
     super.onClose();
   }
 }

@@ -857,5 +857,76 @@
         "type": "String"
       }
     }
-  }
+  },
+  "householdTitle": "Household",
+  "householdSubtitleNone": "Share with a partner or family",
+  "householdNeedSignIn": "Sign in to share with someone else.",
+  "householdIntro": "Share one set of entries, plan and goals with your partner or family. Everyone sees the same numbers.",
+  "householdStartTitle": "Start a household",
+  "householdNameHint": "Household name",
+  "householdStart": "Start",
+  "householdStartConfirmBody": "Starting a household shares all your entries, plan and goals with the people you invite.",
+  "householdJoinTitle": "Join with a code",
+  "householdCodeHint": "Invite code",
+  "householdJoin": "Join",
+  "householdJoinConfirmTitle": "Join this household?",
+  "householdJoinConfirmBody": "Joining shares all your entries, plan and goals with this household. Everyone in it will see them.",
+  "householdMembers": "Members",
+  "householdOwner": "Owner",
+  "householdYou": "You",
+  "householdInvite": "Invite someone",
+  "householdInviteCode": "Invite code: {code}",
+  "@householdInviteCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "householdInviteHint": "Give this code to the person. It works for 7 days.",
+  "householdCopy": "Copy code",
+  "householdCopied": "Code copied",
+  "householdRename": "Rename",
+  "householdRemove": "Remove",
+  "householdRemoveConfirm": "Remove {name}?",
+  "@householdRemoveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "householdRemoveBody": "{name} will no longer see this household. What they added stays here, and they keep a copy of their own entries.",
+  "@householdRemoveBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "householdLeave": "Leave household",
+  "householdLeaveConfirmTitle": "Leave {name}?",
+  "@householdLeaveConfirmTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "householdLeaveBody": "You will no longer see the household's data. You keep a copy of what you added, and the plan. Everyone else keeps everything.",
+  "householdLeaveLast": "You are the last member. The household will end and everything in it will be yours.",
+  "householdErrorCode": "That code is wrong or has expired.",
+  "householdErrorOffline": "No internet. Try again when you are online.",
+  "householdErrorOwner": "Only the owner can do that.",
+  "householdErrorAlready": "You are already in a household.",
+  "householdErrorOther": "Something went wrong. Try again.",
+  "householdRemovedNotice": "You are no longer in {name}. A copy of what you added is now in your own data.",
+  "@householdRemovedNotice": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "householdOk": "OK"
 }

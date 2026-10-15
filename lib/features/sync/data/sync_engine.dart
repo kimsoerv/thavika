@@ -46,6 +46,9 @@ class SyncEngine {
   final PostgrestClient _client;
   final List<SyncTable> _tables;
 
+  /// The tables that sync, in the order they are synced.
+  List<String> get tableNames => [for (final t in _tables) t.name];
+
   static const batchSize = 100;
 
   /// Rows asked from the server at a time.

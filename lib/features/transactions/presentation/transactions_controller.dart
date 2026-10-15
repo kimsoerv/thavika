@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../core/money/money.dart';
 import '../../entry/application/entry_meta_service.dart';
+import '../../household/application/household_service.dart';
 import '../data/transaction_repository.dart';
 
 class TransactionsController extends GetxController {
@@ -75,6 +76,11 @@ class TransactionsController extends GetxController {
     }
     final tags = meta.tagLabel(e.tx.id);
     if (tags.isNotEmpty) parts.add(tags);
+    // In a household, entries made by someone else show their name.
+    final by = Get.isRegistered<HouseholdService>()
+        ? Get.find<HouseholdService>().addedBy(e.tx.ownerId)
+        : null;
+    if (by != null) parts.add(by);
     return parts.join(' · ');
   }
 

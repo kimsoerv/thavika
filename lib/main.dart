@@ -11,6 +11,8 @@ import 'features/entry/data/category_repository.dart';
 import 'features/receipts/receipt_service.dart';
 import 'features/goals/data/challenge_repository.dart';
 import 'features/goals/data/goal_repository.dart';
+import 'features/household/application/household_service.dart';
+import 'features/household/data/household_local.dart';
 import 'features/lock/application/lock_service.dart';
 import 'features/plan/application/budget_service.dart';
 import 'features/plan/application/pay_yourself_first.dart';
@@ -93,8 +95,12 @@ Future<void> main() async {
     permanent: true,
   );
 
-  await Get.putAsync<SyncService>(
+  final sync = await Get.putAsync<SyncService>(
     () => SyncService(db, settings, auth).init(),
+    permanent: true,
+  );
+  await Get.putAsync<HouseholdService>(
+    () => HouseholdService(auth, sync, HouseholdLocal(db), settings).init(),
     permanent: true,
   );
   final widgetSync = await Get.putAsync<WidgetSync>(

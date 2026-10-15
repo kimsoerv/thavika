@@ -22,4 +22,5 @@ abstract class Routes {
   static const debtForm = '/debts/edit';
   static const netWorth = '/net-worth';
   static const account = '/account';
+  static const household = '/household';
 }
