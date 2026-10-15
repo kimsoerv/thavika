@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 
 import '../../../core/db/app_database.dart';
+import '../../household/data/household_local.dart';
 import '../domain/row_codec.dart';
 import 'postgrest_client.dart';
 import 'sync_tables.dart';
@@ -117,6 +118,8 @@ class SyncEngine {
       for (final t in _tables) {
         await _remove(cursorKey(t.name));
       }
+      // The other account's household is not this account's.
+      await _remove(HouseholdLocal.cacheKey);
     }
 
     final pristine = await isPristine();
@@ -296,6 +299,7 @@ class SyncEngine {
     for (final t in _tables) {
       await _remove(cursorKey(t.name));
     }
+    await _remove(HouseholdLocal.cacheKey);
     await _remove(syncUserKey);
   }
 }

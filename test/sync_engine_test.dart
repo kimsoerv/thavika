@@ -6,6 +6,7 @@ import 'package:thavika/features/entry/data/category_repository.dart';
 import 'package:thavika/features/goals/data/goal_repository.dart';
 import 'package:thavika/features/sync/data/postgrest_client.dart';
 import 'package:thavika/features/sync/data/sync_engine.dart';
+import 'package:thavika/features/sync/data/sync_tables.dart';
 import 'package:thavika/features/transactions/data/transaction_repository.dart';
 import 'package:thavika/features/wallets/data/wallet_repository.dart';
 
@@ -380,6 +381,60 @@ void main() {
 
       await small.engine.run();
       expect(await small.entries(), hasLength(25));
+    });
+  });
+
+  group('two people sharing a household', () {
+    // The fake server shows every row to everyone, like a household does.
+    test('an entry edited by someone else keeps its author', () async {
+      final b = Phone(server);
+      addTearDown(b.db.close);
+      await b.engine.attach('user-2', currency: 'USD');
+
+      final id = await a.addExpense(450, note: 'rent');
+      await a.engine.run();
+      await b.engine.run();
+      expect((await b.entries()).single.ownerId, 'user-1');
+
+      await b.tx.update(
+        id,
+        type: 'expense',
+        currency: 'USD',
+        amountMinor: 700,
+        categoryId: 'cat_food',
+        note: 'rent',
+        date: DateTime(2026, 3, 9),
+      );
+      await b.engine.run();
+
+      // Marked synced, and still made by user-1, on both phones and the server.
+      final mine = (await b.entries()).single;
+      expect(mine.syncState, 'synced');
+      expect(mine.ownerId, 'user-1');
+      expect(server.rows('transactions').single['owner_id'], 'user-1');
+
+      await a.engine.run();
+      final theirs = (await a.entries()).single;
+      expect(theirs.amountMinor, 700);
+      expect(theirs.ownerId, 'user-1');
+    });
+
+    test('marking a row synced never changes who made it', () async {
+      // The step between the upload and the next download: if the phone goes
+      // offline right here, the row must not look like it was made by the
+      // person who edited it.
+      final id = await a.addExpense(450);
+      final tx = buildSyncTables(
+        a.db,
+      ).firstWhere((t) => t.name == 'transactions');
+      final updated =
+          (await a.entries()).single.updatedAt.millisecondsSinceEpoch;
+
+      await tx.markSynced(a.db, id, updated ~/ 1000, 'user-1');
+      expect((await a.entries()).single.ownerId, 'user-1');
+
+      await tx.markSynced(a.db, id, updated ~/ 1000, 'user-2');
+      expect((await a.entries()).single.ownerId, 'user-1');
     });
   });
 

@@ -106,6 +106,35 @@ class PostgrestClient {
     });
   }
 
+  /// Rows of a table or view that the signed-in user may read, with the
+  /// given PostgREST query (for example `{'select': '*'}`).
+  Future<List<Map<String, dynamic>>> select(
+    String table, {
+    Map<String, dynamic> query = const {'select': '*'},
+  }) {
+    return _guard(() async {
+      final res = await _dio.get<List<dynamic>>(
+        '/$table',
+        queryParameters: query,
+        options: _options(),
+      );
+      return [for (final r in res.data ?? const []) r as Map<String, dynamic>];
+    });
+  }
+
+  /// Calls a database function with arguments and returns what it answers
+  /// (a string, a number, null ...).
+  Future<dynamic> call(String name, [Map<String, dynamic> args = const {}]) {
+    return _guard(() async {
+      final res = await _dio.post<dynamic>(
+        '/rpc/$name',
+        data: args,
+        options: _options(),
+      );
+      return res.data;
+    });
+  }
+
   /// Calls a database function with no arguments.
   Future<void> rpc(String name) => _guard(
     () => _dio.post<void>(

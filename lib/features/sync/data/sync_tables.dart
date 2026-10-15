@@ -117,7 +117,10 @@ class _Table<T extends Table, D extends DataClass> implements SyncTable {
     String userId,
   ) {
     return db.customStatement(
-      "UPDATE $name SET sync_state = 'synced', owner_id = ? "
+      // The author stays: an entry a household member made and someone else
+      // edited still shows who made it.
+      "UPDATE $name SET sync_state = 'synced', "
+      'owner_id = COALESCE(owner_id, ?) '
       'WHERE id = ? AND updated_at = ?',
       [userId, id, updatedAtSeconds],
     );

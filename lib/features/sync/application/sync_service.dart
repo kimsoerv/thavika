@@ -39,9 +39,12 @@ class SyncService extends GetxService with WidgetsBindingObserver {
   Worker? _userWorker;
   Timer? _debounce;
   Timer? _periodic;
-  var _running = false;
 
   bool get isConfigured => _auth.isConfigured;
+
+  /// The server connection, for features that call the server themselves
+  /// (households). Null without a configured project.
+  PostgrestClient? get client => _client;
 
   Future<SyncService> init() async {
     if (!isConfigured) return this;
@@ -132,13 +135,36 @@ class SyncService extends GetxService with WidgetsBindingObserver {
     _debounce = Timer(const Duration(seconds: 3), syncNow);
   }
 
+  /// Runs a sync, or waits for the one that is running. A request that comes
+  /// in while one is running makes it run once more, so a change made just
+  /// before is never left behind. Completes when the last run is done.
   Future<void> syncNow() async {
     final engine = _engine;
-    if (engine == null || !_auth.isSignedIn || _running) return;
+    if (engine == null || !_auth.isSignedIn) return;
     // Not linked to this account yet (the sign-in flow does that).
     if (await engine.lastUserId() != _auth.user.value?.id) return;
 
-    _running = true;
+    final running = _runDone;
+    if (running != null) {
+      _again = true;
+      return running.future;
+    }
+    final done = _runDone = Completer<void>();
+    try {
+      do {
+        _again = false;
+        await _runOnce(engine);
+      } while (_again);
+    } finally {
+      _runDone = null;
+      done.complete();
+    }
+  }
+
+  Completer<void>? _runDone;
+  var _again = false;
+
+  Future<void> _runOnce(SyncEngine engine) async {
     state.value = SyncState.syncing;
     try {
       await engine.run();
@@ -155,8 +181,6 @@ class SyncService extends GetxService with WidgetsBindingObserver {
     } catch (e) {
       lastError.value = '$e';
       state.value = SyncState.error;
-    } finally {
-      _running = false;
     }
   }
 
