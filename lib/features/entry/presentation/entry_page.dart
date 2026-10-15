@@ -36,8 +36,25 @@ class EntryPage extends GetView<EntryController> {
     return Scaffold(
       appBar: AppBar(
         leading: const CloseButton(),
-        title: Text(controller.isEditing ? l10n.editTitle : l10n.addTitle),
         centerTitle: true,
+        // Expense / income lives in the bar, so the form starts at the amount.
+        title: SizedBox(
+          width: 220,
+          child: Obx(
+            () => SegmentedButton<String>(
+              segments: [
+                ButtonSegment(value: 'expense', label: Text(l10n.expense)),
+                ButtonSegment(value: 'income', label: Text(l10n.income)),
+              ],
+              selected: {controller.type.value},
+              showSelectedIcon: false,
+              style: SegmentedButton.styleFrom(
+                visualDensity: VisualDensity.compact,
+              ),
+              onSelectionChanged: (s) => controller.setType(s.first),
+            ),
+          ),
+        ),
         actions: [
           if (!controller.isEditing)
             Obx(
@@ -61,23 +78,6 @@ class EntryPage extends GetView<EntryController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Obx(
-                      () => SegmentedButton<String>(
-                        segments: [
-                          ButtonSegment(
-                            value: 'expense',
-                            label: Text(l10n.expense),
-                          ),
-                          ButtonSegment(
-                            value: 'income',
-                            label: Text(l10n.income),
-                          ),
-                        ],
-                        selected: {controller.type.value},
-                        showSelectedIcon: false,
-                        onSelectionChanged: (s) => controller.setType(s.first),
-                      ),
-                    ),
                     if (!controller.isEditing)
                       Obx(
                         () => controller.showQuick.value
@@ -96,7 +96,7 @@ class EntryPage extends GetView<EntryController> {
                       return Text(
                         '${Money.symbolFor(controller.currency)}${text.isEmpty ? '0' : text}',
                         textAlign: TextAlign.center,
-                        style: theme.textTheme.displaySmall?.copyWith(
+                        style: theme.textTheme.displayMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: text.isEmpty
                               ? theme.colorScheme.onSurfaceVariant
@@ -122,49 +122,6 @@ class EntryPage extends GetView<EntryController> {
                         ),
                       );
                     }),
-                    Row(
-                      children: [
-                        Obx(
-                          () => ActionChip(
-                            avatar: const Icon(Icons.calendar_today, size: 18),
-                            label: Text(dayLabel(l10n, controller.date.value)),
-                            onPressed: () => _pickDate(context),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: TextField(
-                            controller: controller.noteCtrl,
-                            textInputAction: TextInputAction.done,
-                            maxLength: 100,
-                            decoration: InputDecoration(
-                              hintText: l10n.noteHint,
-                              counterText: '',
-                              isDense: true,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Obx(() {
-                      final list = controller.suggestions;
-                      if (list.isEmpty) return const SizedBox.shrink();
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Wrap(
-                          spacing: 8,
-                          runSpacing: 4,
-                          children: [
-                            for (final s in list)
-                              ActionChip(
-                                label: Text(s.note),
-                                onPressed: () => controller.useSuggestion(s),
-                              ),
-                          ],
-                        ),
-                      );
-                    }),
-                    const SizedBox(height: 12),
                     Obx(
                       () => controller.splitMode.value
                           ? _SplitEditor(controller: controller)
@@ -173,11 +130,63 @@ class EntryPage extends GetView<EntryController> {
                               onMore: () => _addCategory(context),
                             ),
                     ),
-                    const SizedBox(height: 8),
-                    _OptionsRow(controller: controller),
-                    _ReceiptPreview(controller: controller),
                   ],
                 ),
+              ),
+            ),
+            // Date, note and Details stay pinned above the keypad, so they are
+            // always visible and tappable, whatever the phone's height.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Obx(
+                        () => ActionChip(
+                          avatar: const Icon(Icons.calendar_today, size: 18),
+                          label: Text(dayLabel(l10n, controller.date.value)),
+                          onPressed: () => _pickDate(context),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: TextField(
+                          controller: controller.noteCtrl,
+                          textInputAction: TextInputAction.done,
+                          maxLength: 100,
+                          decoration: InputDecoration(
+                            hintText: l10n.noteHint,
+                            counterText: '',
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      _OptionsRow(controller: controller),
+                    ],
+                  ),
+                  Obx(() {
+                    final list = controller.suggestions;
+                    if (list.isEmpty) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: [
+                          for (final s in list)
+                            ActionChip(
+                              label: Text(s.note),
+                              onPressed: () => controller.useSuggestion(s),
+                            ),
+                        ],
+                      ),
+                    );
+                  }),
+                  _ReceiptPreview(controller: controller),
+                ],
               ),
             ),
             _Keypad(controller: controller),
@@ -204,7 +213,13 @@ class EntryPage extends GetView<EntryController> {
                           }
                           Get.back<String>(result: id);
                         },
-                  child: Text(l10n.save),
+                  child: Text(
+                    controller.isEditing
+                        ? l10n.save
+                        : controller.type.value == 'income'
+                        ? l10n.saveIncome
+                        : l10n.saveExpense,
+                  ),
                 ),
               ),
             ),
@@ -235,7 +250,8 @@ class EntryPage extends GetView<EntryController> {
   }
 }
 
-/// Wallet, tags, receipt and split buttons under the note.
+/// One button next to the note. It opens wallet, tags, receipt and split,
+/// which most entries do not need. A dot shows when any of them is set.
 class _OptionsRow extends StatelessWidget {
   const _OptionsRow({required this.controller});
 
@@ -246,55 +262,96 @@ class _OptionsRow extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Obx(() {
-      final meta = controller.meta;
-      final wallet = meta.walletById(controller.walletId.value);
-      final tagNames = [
-        for (final id in controller.tagIds)
-          if (meta.tagById(id) != null) '#${meta.tagById(id)!.name}',
-      ];
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          spacing: 8,
-          children: [
-            if (meta.wallets.length > 1)
-              ActionChip(
-                avatar: const Icon(
-                  Icons.account_balance_wallet_outlined,
-                  size: 18,
-                ),
-                label: Text(wallet?.name ?? l10n.entryWallet),
-                onPressed: () => _pickWallet(context),
-              ),
-            ActionChip(
-              avatar: const Icon(Icons.sell_outlined, size: 18),
-              label: Text(
-                tagNames.isEmpty ? l10n.entryTags : tagNames.join(' '),
-              ),
-              onPressed: () => _pickTags(context),
-            ),
-            ActionChip(
-              avatar: Icon(
-                controller.receipt.value == null
-                    ? Icons.photo_camera_outlined
-                    : Icons.check_circle_outline,
-                size: 18,
-              ),
-              label: Text(l10n.entryReceipt),
-              onPressed: () => _receiptMenu(context),
-            ),
-            if (!controller.isEditing)
-              FilterChip(
-                avatar: const Icon(Icons.call_split, size: 18),
-                label: Text(l10n.entrySplit),
-                selected: controller.splitMode.value,
-                showCheckmark: false,
-                onSelected: (_) => controller.toggleSplit(),
-              ),
-          ],
+      final hasExtras =
+          controller.tagIds.isNotEmpty ||
+          controller.receipt.value != null ||
+          controller.splitMode.value;
+      return Badge(
+        smallSize: 10,
+        isLabelVisible: hasExtras,
+        child: IconButton.outlined(
+          tooltip: l10n.entryDetails,
+          icon: const Icon(Icons.tune),
+          onPressed: () => _openSheet(context),
         ),
       );
     });
+  }
+
+  Future<void> _openSheet(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Obx(() {
+          final meta = controller.meta;
+          final wallet = meta.walletById(controller.walletId.value);
+          final tagNames = [
+            for (final id in controller.tagIds)
+              if (meta.tagById(id) != null) '#${meta.tagById(id)!.name}',
+          ];
+          Widget trailing(String text) => SizedBox(
+            width: 140,
+            child: Text(
+              text,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.end,
+            ),
+          );
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (meta.wallets.length > 1)
+                ListTile(
+                  leading: const Icon(Icons.account_balance_wallet_outlined),
+                  title: Text(l10n.entryWallet),
+                  trailing: trailing(wallet?.name ?? ''),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    _pickWallet(context);
+                  },
+                ),
+              ListTile(
+                leading: const Icon(Icons.sell_outlined),
+                title: Text(l10n.entryTags),
+                trailing: trailing(tagNames.join(' ')),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _pickTags(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  controller.receipt.value == null
+                      ? Icons.photo_camera_outlined
+                      : Icons.check_circle_outline,
+                ),
+                title: Text(l10n.entryReceipt),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _receiptMenu(context);
+                },
+              ),
+              if (!controller.isEditing)
+                ListTile(
+                  leading: const Icon(Icons.call_split),
+                  title: Text(l10n.entrySplit),
+                  selected: controller.splitMode.value,
+                  trailing: controller.splitMode.value
+                      ? const Icon(Icons.check)
+                      : null,
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    controller.toggleSplit();
+                  },
+                ),
+            ],
+          );
+        }),
+      ),
+    );
   }
 
   Future<void> _pickWallet(BuildContext context) async {
@@ -593,7 +650,20 @@ class _SplitEditor extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(l10n.entrySplitTitle, style: theme.textTheme.titleSmall),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                l10n.entrySplitTitle,
+                style: theme.textTheme.titleSmall,
+              ),
+            ),
+            TextButton(
+              onPressed: controller.toggleSplit,
+              child: Text(l10n.cancel),
+            ),
+          ],
+        ),
         const SizedBox(height: 8),
         Obx(
           () => Column(
@@ -658,26 +728,32 @@ class _SplitEditor extends StatelessWidget {
               icon: const Icon(Icons.add, size: 18),
               label: Text(l10n.entrySplitAddPart),
             ),
-            const Spacer(),
-            Obx(() {
-              final left = controller.total - controller.splitAssigned;
-              final String text;
-              final Color color;
-              if (controller.total <= 0) {
-                text = l10n.entrySplitNeedAmount;
-                color = theme.colorScheme.onSurfaceVariant;
-              } else if (left == 0) {
-                text = l10n.entrySplitDone;
-                color = const Color(0xFF2E7D32);
-              } else if (left > 0) {
-                text = l10n.entrySplitLeft(Money.format(left, currency));
-                color = const Color(0xFFB26A00);
-              } else {
-                text = l10n.entrySplitOver(Money.format(-left, currency));
-                color = theme.colorScheme.error;
-              }
-              return Text(text, style: TextStyle(color: color));
-            }),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Obx(() {
+                final left = controller.total - controller.splitAssigned;
+                final String text;
+                final Color color;
+                if (controller.total <= 0) {
+                  text = l10n.entrySplitNeedAmount;
+                  color = theme.colorScheme.onSurfaceVariant;
+                } else if (left == 0) {
+                  text = l10n.entrySplitDone;
+                  color = const Color(0xFF2E7D32);
+                } else if (left > 0) {
+                  text = l10n.entrySplitLeft(Money.format(left, currency));
+                  color = const Color(0xFFB26A00);
+                } else {
+                  text = l10n.entrySplitOver(Money.format(-left, currency));
+                  color = theme.colorScheme.error;
+                }
+                return Text(
+                  text,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(color: color),
+                );
+              }),
+            ),
           ],
         ),
       ],

@@ -667,6 +667,15 @@ class AppLocalizationsKm extends AppLocalizations {
   String get entrySplit => 'បំបែក';
 
   @override
+  String get entryDetails => 'ព័ត៌មានលម្អិត';
+
+  @override
+  String get saveExpense => 'រក្សាទុកចំណាយ';
+
+  @override
+  String get saveIncome => 'រក្សាទុកចំណូល';
+
+  @override
   String get entrySplitTitle => 'បំបែករវាងប្រភេទ';
 
   @override

@@ -666,6 +666,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get entrySplit => 'Split';
 
   @override
+  String get entryDetails => 'Details';
+
+  @override
+  String get saveExpense => 'Save expense';
+
+  @override
+  String get saveIncome => 'Save income';
+
+  @override
   String get entrySplitTitle => 'Split between categories';
 
   @override

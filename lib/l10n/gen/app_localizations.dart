@@ -1286,6 +1286,24 @@ abstract class AppLocalizations {
   /// **'Split'**
   String get entrySplit;
 
+  /// No description provided for @entryDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get entryDetails;
+
+  /// No description provided for @saveExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Save expense'**
+  String get saveExpense;
+
+  /// No description provided for @saveIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Save income'**
+  String get saveIncome;
+
   /// No description provided for @entrySplitTitle.
   ///
   /// In en, this message translates to:
