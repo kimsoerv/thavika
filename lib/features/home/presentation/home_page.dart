@@ -103,8 +103,59 @@ class HomePage extends GetView<HomeController> {
               const SizedBox(height: 16),
               _WalletsRow(controller: controller),
             ],
-            if (slices.isNotEmpty) ...[
-              const SizedBox(height: 20),
+            const SizedBox(height: 20),
+            if (!hasEntries)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.account_balance_wallet_outlined,
+                      size: 48,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      l10n.noEntriesTitle,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.noEntriesBody,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            else ...[
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.recent,
+                      style: theme.textTheme.titleSmall,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Get.find<ShellController>().tab.value =
+                        ShellController.transactionsTab,
+                    child: Text(l10n.tabTransactions),
+                  ),
+                ],
+              ),
+              for (final item in controller.recent)
+                TxTile(
+                  item: item,
+                  showDate: true,
+                  extra: controller.extraFor(item),
+                  onTap: () => Get.toNamed(Routes.entry, arguments: item),
+                ),
+            ],
+            if (slices.isNotEmpty && hasEntries) ...[
+              const SizedBox(height: 12),
               Text(l10n.spendingByCategory, style: theme.textTheme.titleSmall),
               const SizedBox(height: 8),
               ClipRRect(
@@ -156,44 +207,6 @@ class HomePage extends GetView<HomeController> {
                     ),
                 ],
               ),
-            ],
-            const SizedBox(height: 20),
-            if (!hasEntries)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      size: 48,
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      l10n.noEntriesTitle,
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      l10n.noEntriesBody,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            else ...[
-              Text(l10n.recent, style: theme.textTheme.titleSmall),
-              const SizedBox(height: 4),
-              for (final item in controller.recent)
-                TxTile(
-                  item: item,
-                  showDate: true,
-                  extra: controller.extraFor(item),
-                  onTap: () => Get.toNamed(Routes.entry, arguments: item),
-                ),
             ],
           ],
         );
