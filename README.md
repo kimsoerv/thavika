@@ -2,10 +2,10 @@
 
 A simple money app for everyday people: note daily spending and income, plan the
 month, track plan against what really happened, and save toward goals. Works fully
-offline; sign-in and sync (Supabase, free plan) and Gemini scanning with your own key
-are planned. English and Khmer.
+offline; Google sign-in and sync (Supabase, free plan) are built. Gemini scanning with
+your own key and households are planned. English and Khmer.
 
-Status: the offline app (Phase A) is built. See [docs/roadmap.md](docs/roadmap.md)
+Status: the offline app (Phase A) and sign-in and sync (Phase B) are built. See [docs/roadmap.md](docs/roadmap.md)
 for what is done and what is next.
 
 ## What it does
@@ -27,6 +27,20 @@ Supabase (planned for sync). Money is stored as whole minor units (cents).
 ```bash
 flutter pub get
 flutter run
+```
+
+Sign-in and sync need your own Supabase project and Google OAuth clients; without
+them the app runs as a guest, offline. Set up once:
+
+1. Supabase: run `supabase/migrations/0001_init.sql` in the SQL Editor, then turn on
+   Authentication > Providers > Google with the Web client ID and secret, and list the
+   Web, Android and iOS client IDs under Authorized Client IDs.
+2. Google Cloud: create OAuth clients of type Web, Android (package
+   `com.thavika.thavika` and the SHA-1 of your signing key) and iOS.
+3. Copy `env.example.json` to `env.json`, fill it in, and start the app with:
+
+```bash
+flutter run --dart-define-from-file=env.json
 ```
 
 Tests and checks:

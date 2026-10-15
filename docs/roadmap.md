@@ -67,13 +67,15 @@ Order matters: data model changes come first, because every new table or column 
 - [ ] iPhone widget: needs a WidgetKit extension created in Xcode with an App Group, so it is done together with the Apple developer account in Phase E
 
 ## Phase B: online (sign-in and sync)
-- [~] Supabase tables, security rules (SQL written, not yet run)
-- [ ] Google sign-in (guest mode stays)
-- [ ] Sync engine (outbox, push, pull, retry, last write wins), all tables including Phase A ones
-- [ ] "Waiting to sync" badge and sync status
-- [ ] Guest to signed-in upload, switching accounts safely
-- [ ] Delete my account and cloud data
-- [ ] Receipt photos in cloud storage (decision needed: phone only, or Supabase storage)
+Checked on a real Android phone: sign-in, push to Supabase, reinstall and pull back, and a second phone.
+- [x] Supabase tables, security rules (run and working)
+- [x] Google sign-in (guest mode stays)
+- [x] Sync engine (outbox, push, pull, retry, last write wins), all tables including Phase A ones
+- [x] "Waiting to sync" badge and sync status
+- [~] Guest to signed-in upload, switching accounts safely (built and tested in code; not checked on a phone)
+- [~] Delete my account and cloud data (built; not checked on a phone)
+- [~] Offline edits syncing later, and undo-delete reaching a second phone (tested in code; not checked on a phone)
+- [ ] Receipt photos in cloud storage (decision needed: phone only, or Supabase storage; today they stay on the phone)
 
 ## Phase C: household
 - [ ] Create household, invite code or link, join with confirmation
