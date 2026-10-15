@@ -48,57 +48,59 @@ class HomePage extends GetView<HomeController> {
               ],
             ),
             const SizedBox(height: 12),
-            if (check != null) ...[
-              _SafeToSpend(
+            if (check != null)
+              _HeroCard(
                 amount: Money.format(check.safeToSpend, currency),
                 status: check.overall,
+                balance: Money.format(controller.balance, currency),
+                income: Money.format(controller.income, currency),
+                spent: Money.format(controller.spent, currency),
                 onTap: () => Get.find<ShellController>().tab.value =
                     ShellController.planTab,
-              ),
-              const SizedBox(height: 12),
-            ],
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.balanceThisMonth,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      Money.format(controller.balance, currency),
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _Metric(
-                            label: l10n.income,
-                            value: Money.format(controller.income, currency),
-                            color: theme.colorScheme.primary,
-                          ),
+              )
+            else
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.balanceThisMonth,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
                         ),
-                        Expanded(
-                          child: _Metric(
-                            label: l10n.spent,
-                            value: Money.format(controller.spent, currency),
-                            color: theme.colorScheme.error,
-                          ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        Money.format(controller.balance, currency),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _Metric(
+                              label: l10n.income,
+                              value: Money.format(controller.income, currency),
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                          Expanded(
+                            child: _Metric(
+                              label: l10n.spent,
+                              value: Money.format(controller.spent, currency),
+                              color: theme.colorScheme.error,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
             if (controller.meta.wallets.length > 1) ...[
               const SizedBox(height: 16),
               _WalletsRow(controller: controller),
@@ -134,10 +136,7 @@ class HomePage extends GetView<HomeController> {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      l10n.recent,
-                      style: theme.textTheme.titleSmall,
-                    ),
+                    child: Text(l10n.recent, style: theme.textTheme.titleSmall),
                   ),
                   TextButton(
                     onPressed: () => Get.find<ShellController>().tab.value =
@@ -156,57 +155,7 @@ class HomePage extends GetView<HomeController> {
             ],
             if (slices.isNotEmpty && hasEntries) ...[
               const SizedBox(height: 12),
-              Text(l10n.spendingByCategory, style: theme.textTheme.titleSmall),
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: SizedBox(
-                  height: 12,
-                  child: Row(
-                    children: [
-                      for (final s in slices)
-                        Expanded(
-                          flex: s.amountMinor,
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 2),
-                            color: s.category == null
-                                ? theme.colorScheme.outline
-                                : colorForCategory(s.category!.id),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 16,
-                runSpacing: 4,
-                children: [
-                  for (final s in slices)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: 10,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: s.category == null
-                                ? theme.colorScheme.outline
-                                : colorForCategory(s.category!.id),
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          '${s.category == null ? l10n.otherSlice : categoryDisplayName(l10n, s.category)} '
-                          '${Money.format(s.amountMinor, currency)}',
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                ],
-              ),
+              _CategoryBreakdown(slices: slices, currency: currency),
             ],
           ],
         );
@@ -215,15 +164,23 @@ class HomePage extends GetView<HomeController> {
   }
 }
 
-class _SafeToSpend extends StatelessWidget {
-  const _SafeToSpend({
+/// The one card that answers "can I spend today?", with the month's totals
+/// underneath. Tap to open the plan.
+class _HeroCard extends StatelessWidget {
+  const _HeroCard({
     required this.amount,
     required this.status,
+    required this.balance,
+    required this.income,
+    required this.spent,
     required this.onTap,
   });
 
   final String amount;
   final PaceStatus status;
+  final String balance;
+  final String income;
+  final String spent;
   final VoidCallback onTap;
 
   @override
@@ -232,37 +189,175 @@ class _SafeToSpend extends StatelessWidget {
     final theme = Theme.of(context);
     final color = paceColor(status, theme.colorScheme);
     return InkWell(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(20),
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
                     l10n.checkSafeToSpend,
                     style: theme.textTheme.labelLarge?.copyWith(color: color),
                   ),
-                  Text(
-                    amount,
-                    style: theme.textTheme.headlineMedium?.copyWith(
-                      color: color,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+                ),
+                Icon(Icons.chevron_right, color: color),
+              ],
+            ),
+            Text(
+              amount,
+              style: theme.textTheme.displaySmall?.copyWith(
+                color: color,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            Icon(Icons.chevron_right, color: color),
+            Text(
+              paceLabel(l10n, status),
+              style: theme.textTheme.bodyMedium?.copyWith(color: color),
+            ),
+            const SizedBox(height: 12),
+            Divider(height: 1, color: color.withValues(alpha: 0.25)),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _Metric(
+                    label: l10n.homeBalance,
+                    value: balance,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+                Expanded(
+                  child: _Metric(
+                    label: l10n.income,
+                    value: income,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                Expanded(
+                  child: _Metric(
+                    label: l10n.spent,
+                    value: spent,
+                    color: theme.colorScheme.error,
+                  ),
+                ),
+              ],
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Spending by category: a one-line bar that opens into the full list.
+class _CategoryBreakdown extends StatefulWidget {
+  const _CategoryBreakdown({required this.slices, required this.currency});
+
+  final List<CategorySlice> slices;
+  final String currency;
+
+  @override
+  State<_CategoryBreakdown> createState() => _CategoryBreakdownState();
+}
+
+class _CategoryBreakdownState extends State<_CategoryBreakdown> {
+  var _open = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final slices = widget.slices;
+
+    Color colorOf(CategorySlice s) => s.category == null
+        ? theme.colorScheme.outline
+        : colorForCategory(s.category!.id);
+
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => setState(() => _open = !_open),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 12, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.spendingByCategory,
+                      style: theme.textTheme.titleSmall,
+                    ),
+                  ),
+                  Icon(_open ? Icons.expand_less : Icons.expand_more),
+                ],
+              ),
+              const SizedBox(height: 4),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: SizedBox(
+                  height: 10,
+                  child: Row(
+                    children: [
+                      for (final s in slices)
+                        Expanded(
+                          flex: s.amountMinor,
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 2),
+                            color: colorOf(s),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              AnimatedSize(
+                duration: const Duration(milliseconds: 200),
+                alignment: Alignment.topCenter,
+                child: _open
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 12, right: 4),
+                        child: Wrap(
+                          spacing: 16,
+                          runSpacing: 6,
+                          children: [
+                            for (final s in slices)
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: colorOf(s),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    '${s.category == null ? l10n.otherSlice : categoryDisplayName(l10n, s.category)} '
+                                    '${Money.format(s.amountMinor, widget.currency)}',
+                                    style: theme.textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox(width: double.infinity),
+              ),
+            ],
+          ),
         ),
       ),
     );

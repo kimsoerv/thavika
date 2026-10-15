@@ -24,6 +24,9 @@ class AppLocalizationsKm extends AppLocalizations {
   String get balanceThisMonth => 'សមតុល្យខែនេះ';
 
   @override
+  String get homeBalance => 'សមតុល្យ';
+
+  @override
   String get income => 'ចំណូល';
 
   @override

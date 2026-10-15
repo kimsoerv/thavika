@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Balance this month'**
   String get balanceThisMonth;
 
+  /// No description provided for @homeBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get homeBalance;
+
   /// No description provided for @income.
   ///
   /// In en, this message translates to:

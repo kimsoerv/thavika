@@ -6,6 +6,7 @@ KM = {
 "tabTransactions": "កំណត់ត្រា",
 "tabPlan": "ផែនការ",
 "balanceThisMonth": "សមតុល្យខែនេះ",
+"homeBalance": "សមតុល្យ",
 "income": "ចំណូល",
 "expense": "ចំណាយ",
 "spent": "បានចំណាយ",
