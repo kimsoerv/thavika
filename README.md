@@ -32,7 +32,8 @@ flutter run
 Sign-in and sync need your own Supabase project and Google OAuth clients; without
 them the app runs as a guest, offline. Set up once:
 
-1. Supabase: run `supabase/migrations/0001_init.sql` in the SQL Editor, then turn on
+1. Supabase: run `supabase/migrations/0001_init.sql`, then `0002_households.sql`, in the SQL
+   Editor (the second one is for household sharing), then turn on
    Authentication > Providers > Google with the Web client ID and secret, and list the
    Web, Android and iOS client IDs under Authorized Client IDs.
 2. Google Cloud: create OAuth clients of type Web, Android (package
@@ -44,6 +45,9 @@ flutter run --dart-define-from-file=env.json
 ```
 
 Tests and checks:
+
+The Supabase rules (households, who can see what) are checked on a local Postgres:
+`supabase/tests/run.sh` (needs a running Postgres and `PGUSER` with superuser rights).
 
 ```bash
 flutter analyze
