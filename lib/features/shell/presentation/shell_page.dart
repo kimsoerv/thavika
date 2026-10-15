@@ -51,58 +51,77 @@ class ShellPage extends GetView<ShellController> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _add(context),
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 6,
-        child: Obx(
-          () => Row(
-            children: [
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.home_outlined,
-                  selectedIcon: Icons.home,
-                  label: l10n.tabHome,
-                  selected: controller.tab.value == ShellController.homeTab,
-                  onTap: () => controller.tab.value = ShellController.homeTab,
-                ),
+      bottomNavigationBar: Material(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            height: 80,
+            child: Obx(
+              () => Row(
+                children: [
+                  Expanded(
+                    child: _NavItem(
+                      icon: Icons.home_outlined,
+                      selectedIcon: Icons.home,
+                      label: l10n.tabHome,
+                      selected: controller.tab.value == ShellController.homeTab,
+                      onTap: () =>
+                          controller.tab.value = ShellController.homeTab,
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      icon: Icons.receipt_long_outlined,
+                      selectedIcon: Icons.receipt_long,
+                      label: l10n.tabTransactions,
+                      selected:
+                          controller.tab.value ==
+                          ShellController.transactionsTab,
+                      onTap: () => controller.tab.value =
+                          ShellController.transactionsTab,
+                    ),
+                  ),
+                  // Add sits in the same place on every tab.
+                  SizedBox(
+                    width: 80,
+                    child: Center(
+                      child: IconButton.filled(
+                        tooltip: l10n.addTitle,
+                        iconSize: 28,
+                        style: IconButton.styleFrom(
+                          minimumSize: const Size(56, 56),
+                          fixedSize: const Size(56, 56),
+                        ),
+                        icon: const Icon(Icons.add),
+                        onPressed: () => _add(context),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      icon: Icons.track_changes_outlined,
+                      selectedIcon: Icons.track_changes,
+                      label: l10n.tabPlan,
+                      selected: controller.tab.value == ShellController.planTab,
+                      onTap: () =>
+                          controller.tab.value = ShellController.planTab,
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      icon: Icons.bar_chart_outlined,
+                      selectedIcon: Icons.bar_chart,
+                      label: l10n.tabReports,
+                      selected:
+                          controller.tab.value == ShellController.reportsTab,
+                      onTap: () =>
+                          controller.tab.value = ShellController.reportsTab,
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.receipt_long_outlined,
-                  selectedIcon: Icons.receipt_long,
-                  label: l10n.tabTransactions,
-                  selected:
-                      controller.tab.value == ShellController.transactionsTab,
-                  onTap: () =>
-                      controller.tab.value = ShellController.transactionsTab,
-                ),
-              ),
-              const SizedBox(width: 72),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.track_changes_outlined,
-                  selectedIcon: Icons.track_changes,
-                  label: l10n.tabPlan,
-                  selected: controller.tab.value == ShellController.planTab,
-                  onTap: () => controller.tab.value = ShellController.planTab,
-                ),
-              ),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.bar_chart_outlined,
-                  selectedIcon: Icons.bar_chart,
-                  label: l10n.tabReports,
-                  selected: controller.tab.value == ShellController.reportsTab,
-                  onTap: () =>
-                      controller.tab.value = ShellController.reportsTab,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -128,23 +147,44 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     final color = selected
-        ? theme.colorScheme.primary
-        : theme.colorScheme.onSurfaceVariant;
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(selected ? selectedIcon : icon, color: color),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.labelSmall?.copyWith(color: color),
-          ),
-        ],
+        ? scheme.onSecondaryContainer
+        : scheme.onSurfaceVariant;
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: label,
+      excludeSemantics: true,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              width: 56,
+              height: 32,
+              decoration: BoxDecoration(
+                color: selected
+                    ? scheme.secondaryContainer
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(selected ? selectedIcon : icon, color: color),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: color,
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

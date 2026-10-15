@@ -2,7 +2,7 @@
   "@@locale": "en",
   "appName": "Thavika",
   "tabHome": "Home",
-  "tabTransactions": "Transactions",
+  "tabTransactions": "History",
   "tabPlan": "Plan",
   "balanceThisMonth": "Balance this month",
   "income": "Income",

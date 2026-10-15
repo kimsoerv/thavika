@@ -113,7 +113,7 @@ abstract class AppLocalizations {
   /// No description provided for @tabTransactions.
   ///
   /// In en, this message translates to:
-  /// **'Transactions'**
+  /// **'History'**
   String get tabTransactions;
 
   /// No description provided for @tabPlan.
