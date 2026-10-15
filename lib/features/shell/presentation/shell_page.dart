@@ -53,6 +53,13 @@ class ShellPage extends GetView<ShellController> {
       ),
       bottomNavigationBar: Material(
         color: Theme.of(context).colorScheme.surfaceContainer,
+        elevation: 3,
+        shadowColor: Colors.black54,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        clipBehavior: Clip.antiAlias,
         child: SafeArea(
           top: false,
           child: SizedBox(
@@ -86,15 +93,14 @@ class ShellPage extends GetView<ShellController> {
                   SizedBox(
                     width: 80,
                     child: Center(
-                      child: IconButton.filled(
+                      child: FloatingActionButton(
+                        heroTag: null,
                         tooltip: l10n.addTitle,
-                        iconSize: 28,
-                        style: IconButton.styleFrom(
-                          minimumSize: const Size(56, 56),
-                          fixedSize: const Size(56, 56),
-                        ),
-                        icon: const Icon(Icons.add),
+                        elevation: 2,
+                        highlightElevation: 4,
+                        shape: const CircleBorder(),
                         onPressed: () => _add(context),
+                        child: const Icon(Icons.add, size: 28),
                       ),
                     ),
                   ),
@@ -156,22 +162,27 @@ class _NavItem extends StatelessWidget {
       selected: selected,
       label: label,
       excludeSemantics: true,
-      child: InkWell(
+      // The whole tab is tappable; only the round pill shows the ripple.
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              width: 56,
-              height: 32,
-              decoration: BoxDecoration(
-                color: selected
-                    ? scheme.secondaryContainer
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(16),
+            Material(
+              color: selected ? scheme.secondaryContainer : Colors.transparent,
+              shape: const StadiumBorder(),
+              clipBehavior: Clip.antiAlias,
+              animationDuration: const Duration(milliseconds: 200),
+              child: InkWell(
+                onTap: onTap,
+                customBorder: const StadiumBorder(),
+                child: SizedBox(
+                  width: 64,
+                  height: 32,
+                  child: Icon(selected ? selectedIcon : icon, color: color),
+                ),
               ),
-              child: Icon(selected ? selectedIcon : icon, color: color),
             ),
             const SizedBox(height: 4),
             Text(
